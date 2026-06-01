@@ -24,7 +24,7 @@ This repo is set up for a **static** Cloudflare Pages deploy of the site in `art
 | Setting | Value |
 |--------|--------|
 | **Framework preset** | None |
-| **Build command** | `pnpm run build:pages` |
+| **Build command** | `pnpm run build` (or `pnpm run build:pages`) |
 | **Build output directory** | `artifacts/pina-local-sites/dist/public` |
 
 Cloudflare will also read `pages_build_output_dir` from [`wrangler.toml`](wrangler.toml) if the output directory field is left empty.

@@ -8,8 +8,9 @@
   },
   "scripts": {
     "preinstall": "sh -c 'rm -f package-lock.json yarn.lock; case \"$npm_config_user_agent\" in pnpm/*) ;; *) echo \"Use pnpm instead\" >&2; exit 1 ;; esac'",
-    "build": "pnpm run typecheck && pnpm -r --if-present run build",
-    "build:pages": "pnpm --filter @workspace/pina-local-sites run build",
+    "build": "pnpm --filter @workspace/pina-local-sites run build",
+    "build:pages": "pnpm run build",
+    "build:all": "pnpm run typecheck && pnpm -r --if-present run build",
     "dev": "pnpm --filter @workspace/pina-local-sites run dev",
     "typecheck:libs": "tsc --build",
     "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
