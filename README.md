@@ -36,7 +36,7 @@ Do **not** add a `wrangler.toml` at the repo root in this monorepo — Cloudflar
 | `BASE_PATH` | Asset and router base path (default `/`) |
 | `NODE_VERSION` | Set to `22` if the dashboard does not pick up [`.node-version`](.node-version) |
 
-5. Deploy. Client-side routes (`/privacy-policy`, `/terms-of-service`, `/your-offer`, etc.) are handled by [`public/_redirects`](artifacts/pina-local-sites/public/_redirects) (SPA fallback to `index.html`).
+5. Deploy. Client-side routes work automatically: Cloudflare Pages treats the site as an SPA when there is no top-level `404.html` in the build output (see [Serving Pages](https://developers.cloudflare.com/pages/configuration/serving-pages/#single-page-application-spa-rendering)). Do **not** add `/* /index.html 200` to `_redirects` — Cloudflare rejects that rule as an infinite loop.
 
 ### Custom domain
 
