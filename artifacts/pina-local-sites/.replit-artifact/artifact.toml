@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Pina Local Sites"
+version = "1.0.0"
+id = "artifacts/pina-local-sites"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22687
+
+[services.development]
+run = "pnpm --filter @workspace/pina-local-sites run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/pina-local-sites", "run", "build" ]
+publicDir = "artifacts/pina-local-sites/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22687"
+BASE_PATH = "/"

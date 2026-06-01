@@ -1,0 +1,92 @@
+Here’s a much cleaner and more realistic version for your actual business model (landing page + consultation booking + web agency services). This is what I would personally use at your current stage instead of the very long SaaS-style template. It covers the important parts without overcomplicating things. 
+
+---
+
+# Privacy Policy
+
+**Effective Date:** May 1, 2026
+
+Pina Local Sites (“Pina Local Sites”, “we”, “our”, or “us”) respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and protect information when you visit [https://pinalocalsites.com](https://pinalocalsites.com) (the “Site”) or contact us regarding our services.
+
+## Information We Collect
+
+We may collect personal information that you voluntarily provide, including:
+
+* Name
+* Email address
+* Phone number
+* Business information
+* Information submitted through contact or consultation forms
+
+We may also automatically collect certain technical information when you visit the Site, including:
+
+* IP address
+* Browser type
+* Device information
+* Pages visited
+* General website usage data
+
+## How We Use Your Information
+
+We use your information to:
+
+* Respond to inquiries and consultation requests
+* Communicate with you about our services
+* Improve our website and services
+* Protect against spam, fraud, or abuse
+* Comply with legal obligations
+
+We do not sell your personal information.
+
+## Cookies
+
+Our website may use essential cookies and basic analytics tools to improve functionality and understand website usage. You can disable cookies through your browser settings if you prefer.
+
+## Third-Party Services
+
+We may use trusted third-party providers to help operate our business and website, including:
+
+* Website hosting providers
+* Email providers
+* Analytics providers
+* Scheduling or communication tools
+
+These providers may process limited information necessary to perform their services.
+
+## Data Retention
+
+We retain personal information only as long as reasonably necessary for business, legal, or operational purposes.
+
+## Data Security
+
+We take reasonable technical and organizational measures to protect your personal information. However, no method of internet transmission or storage is completely secure.
+
+## Children’s Privacy
+
+Our services are not intended for individuals under the age of 18, and we do not knowingly collect personal information from children.
+
+## International Users
+
+Our services are operated from the United States and may involve data processing in other countries. By using the Site, you consent to the transfer and processing of your information in accordance with this Privacy Policy.
+
+## Your Rights
+
+Depending on your location, you may have rights regarding your personal information, including the right to request access, correction, or deletion of your data.
+
+To make a request, contact us at:
+[adrian@pinalocalsites.com](mailto:adrian@pinalocalsites.com)
+
+## Contact Information
+
+Pina Local Sites
+[adrian@pinalocalsites.com](mailto:adrian@pinalocalsites.com)
++1 (808) 515-5573
+
+1209 MOUNTAIN ROAD PL NE
+STE N
+ALBUQUERQUE, NM 87110
+USA
+
+## Changes to This Policy
+
+We may update this Privacy Policy from time to time. Updated versions will be posted on this page with a revised effective date.
