@@ -27,7 +27,7 @@ This repo is set up for a **static** Cloudflare Pages deploy of the site in `art
 | **Build command** | `pnpm run build` (or `pnpm run build:pages`) |
 | **Build output directory** | `artifacts/pina-local-sites/dist/public` |
 
-Cloudflare will also read `pages_build_output_dir` from [`wrangler.toml`](wrangler.toml) if the output directory field is left empty.
+Do **not** add a `wrangler.toml` at the repo root in this monorepo — Cloudflare will run Wrangler workspace detection and fail. Configure build command and output directory in the dashboard only.
 
 4. Under **Environment variables**, you usually do not need any for a static build. Optional overrides:
 
