@@ -27,7 +27,7 @@ const tiers = [
   {
     name: "Essential",
     tagline: "Perfect for getting online fast",
-    price: "$30",
+    price: "$25",
     period: "/ month",
     highlight: false,
     highlightFirst: false,
