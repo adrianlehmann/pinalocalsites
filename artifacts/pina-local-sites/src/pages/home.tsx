@@ -14,12 +14,9 @@ import {
 } from "lucide-react";
 import logoPath from "@/assets/images/logo.avif";
 import heroImg from "../assets/images/hero.avif";
-import imgRestaurant from "../assets/images/portfolio-restaurant.png";
-import imgBoutique from "../assets/images/portfolio-boutique.png";
-import imgPlumber from "../assets/images/portfolio-plumber.png";
-import imgYoga from "../assets/images/portfolio-yoga.png";
-import imgBakery from "../assets/images/portfolio-bakery.png";
-import imgLandscaper from "../assets/images/portfolio-landscaper.png";
+import imgFiti from "../assets/images/portfolio-fiti.png";
+import imgComedy from "../assets/images/portfolio-comedy.png";
+import imgLpm from "../assets/images/portfolio-lpm.png";
 
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
@@ -28,58 +25,31 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 const portfolioItems = [
   {
-    id: "restaurant",
-    name: "Osteria Local",
-    type: "Restaurant",
+    id: "fiti",
+    name: "FITI PRM",
+    type: "Personal Relationship Manager",
     description:
-      "A luxury dining experience with integrated reservation system and dynamic menus. We built Osteria Local to capture the warmth of their physical space.",
-    image: imgRestaurant,
-    tags: ["React", "Tailwind", "Reservation API"],
+      "FITI is an AI-powered revenue execution platform for law firms, consultancies, and professional service firms. It ensures consistent outreach, activates relationships, and creates opportunities before pipeline exists.",
+    image: imgFiti,
+    tags: ["Web", "Mobile", "AI", "React", "Tailwind", "Next.js", "Azure"],
   },
   {
-    id: "boutique",
-    name: "Thread & Thread",
-    type: "Boutique",
+    id: "comedy",
+    name: "Comedy Bus Tours",
+    type: "Bus Tour Service",
     description:
-      "A trendy fashion boutique e-commerce platform that loads instantly on mobile and handles complex inventory seamlessly.",
-    image: imgBoutique,
-    tags: ["E-commerce", "Stripe", "Next.js"],
+      "A high-energy sightseeing showcase with integrated booking funnels and dynamic itinerary layouts, built for Comedy on Deck Tours to capture the laughter and scale of their live-entertainment excursions.",
+    image: imgComedy,
+    tags: ["Web", "Mobile", "WordPress", "Elementor"],
   },
   {
-    id: "plumber",
-    name: "Reliable Pipes",
-    type: "Plumbing Service",
+    id: "lpm",
+    name: "Local Pack Monster",
+    type: "Automated Local SEO Software",
     description:
-      "A high-conversion service website designed to get leads fast. Clear pricing, easy contact forms, and local SEO optimized.",
-    image: imgPlumber,
-    tags: ["SEO", "Lead Gen", "HTML/CSS"],
-  },
-  {
-    id: "yoga",
-    name: "Zenith Yoga",
-    type: "Yoga Studio",
-    description:
-      "A serene studio portal offering class schedules, member portals, and virtual class streaming.",
-    image: imgYoga,
-    tags: ["Webflow", "Memberstack", "Video API"],
-  },
-  {
-    id: "bakery",
-    name: "Crust & Crumb",
-    type: "Artisanal Bakery",
-    description:
-      "Showcasing artisanal breads with rich photography and a smooth online pre-ordering system.",
-    image: imgBakery,
-    tags: ["Shopify", "Custom Design"],
-  },
-  {
-    id: "landscaper",
-    name: "Green Horizons",
-    type: "Landscaping",
-    description:
-      "A robust portfolio site for a high-end landscaping company highlighting their best projects with before-and-after galleries.",
-    image: imgLandscaper,
-    tags: ["CMS", "Gallery", "Animation"],
+      "A powerful optimization engine with interactive ranking trackers and hands-free profile syncing, engineered for Local Pack Monster to effortlessly demonstrate how their AI agents automate Google Maps visibility.",
+    image: imgLpm,
+    tags: ["Web", "Mobile", "WordPress", "Elementor"],
   },
 ];
 
