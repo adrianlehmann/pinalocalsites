@@ -12,10 +12,6 @@ import {
   CheckCircle2,
   Mail,
 } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-
 import logoPath from "@/assets/images/logo.avif";
 import heroImg from "../assets/images/hero.avif";
 import imgRestaurant from "../assets/images/portfolio-restaurant.png";
@@ -26,16 +22,6 @@ import imgBakery from "../assets/images/portfolio-bakery.png";
 import imgLandscaper from "../assets/images/portfolio-landscaper.png";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 // --- Types & Data ---
@@ -97,15 +83,7 @@ const portfolioItems = [
   },
 ];
 
-const contactSchema = z.object({
-  name: z.string().min(2, "Name is required"),
-  email: z.string().email("Please enter a valid email"),
-  businessName: z.string().min(2, "Business name is required"),
-  phone: z.string().optional(),
-  message: z.string().optional(),
-});
-
-type ContactFormValues = z.infer<typeof contactSchema>;
+const CALENDLY_URL = "https://calendly.com/pinalocalsites/30min";
 
 // --- Components ---
 
@@ -486,29 +464,6 @@ function Portfolio() {
 }
 
 function Book() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const form = useForm<ContactFormValues>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      businessName: "",
-      phone: "",
-      message: "",
-    },
-  });
-
-  const onSubmit = (data: ContactFormValues) => {
-    console.log("Form submitted:", data);
-    setIsSubmitted(true);
-    // Reset form after delay
-    setTimeout(() => {
-      form.reset();
-      setIsSubmitted(false);
-    }, 5000);
-  };
-
   return (
     <section id="book" className="py-24 bg-card relative overflow-hidden">
       {/* Decorative background element */}
@@ -554,129 +509,27 @@ function Book() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="w-full max-w-md bg-background rounded-3xl p-8 shadow-xl border relative"
+            className="w-full max-w-md bg-background rounded-3xl p-8 shadow-xl border relative flex flex-col justify-center min-h-[280px]"
           >
-            {isSubmitted ? (
-              <div
-                className="flex flex-col items-center justify-center h-full min-h-[400px] text-center"
-                data-testid="form-success"
+            <h3 className="text-2xl font-bold mb-4">Book a Consultation</h3>
+            <p className="text-muted-foreground mb-8">
+              Pick a time that works for you. You'll be taken to our Calendly
+              page to schedule your free 30-minute discovery call.
+            </p>
+            <Button
+              asChild
+              className="w-full rounded-full py-6 text-base font-bold"
+              data-testid="button-book-calendly"
+            >
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <div className="w-16 h-16 bg-primary/20 text-primary rounded-full flex items-center justify-center mb-6">
-                  <CheckCircle2 className="w-8 h-8" />
-                </div>
-                <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
-                <p className="text-muted-foreground">
-                  Thanks for reaching out. We'll be in touch within 24 hours to
-                  schedule your consultation.
-                </p>
-              </div>
-            ) : (
-              <>
-                <h3 className="text-2xl font-bold mb-6">Book a Consultation</h3>
-                <Form {...form}>
-                  <form
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-4"
-                  >
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="Jane Doe"
-                              {...field}
-                              data-testid="input-name"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Email</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="email"
-                              placeholder="jane@example.com"
-                              {...field}
-                              data-testid="input-email"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="businessName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Business Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="Jane's Bakery"
-                              {...field}
-                              data-testid="input-business"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="phone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Phone (optional)</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="tel"
-                              placeholder="(555) 123-4567"
-                              {...field}
-                              data-testid="input-phone"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="message"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Project Description</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder="Tell us a bit about what you're looking for..."
-                              className="resize-none"
-                              {...field}
-                              data-testid="input-message"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <Button
-                      type="submit"
-                      className="w-full rounded-full py-6 text-base font-bold mt-2"
-                      data-testid="button-submit"
-                    >
-                      Send Request
-                    </Button>
-                  </form>
-                </Form>
-              </>
-            )}
+                Schedule on Calendly
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </a>
+            </Button>
           </motion.div>
         </div>
       </div>
