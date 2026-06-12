@@ -31,6 +31,7 @@ const portfolioItems = [
     description:
       "FITI is an AI-powered revenue execution platform for law firms, consultancies, and professional service firms. It ensures consistent outreach, activates relationships, and creates opportunities before pipeline exists.",
     image: imgFiti,
+    iconColor: "#aaaaaa",
     tags: ["Web", "Mobile", "AI", "React", "Tailwind", "Next.js", "Azure"],
   },
   {
@@ -40,6 +41,7 @@ const portfolioItems = [
     description:
       "A high-energy sightseeing showcase with integrated booking funnels and dynamic itinerary layouts, built for Comedy on Deck Tours to capture the laughter and scale of their live-entertainment excursions.",
     image: imgComedy,
+    iconColor: "#ffffff",
     tags: ["Web", "Mobile", "WordPress", "Elementor"],
   },
   {
@@ -49,6 +51,7 @@ const portfolioItems = [
     description:
       "A powerful optimization engine with interactive ranking trackers and hands-free profile syncing, engineered for Local Pack Monster to effortlessly demonstrate how their AI agents automate Google Maps visibility.",
     image: imgLpm,
+    iconColor: "#ffffff",
     tags: ["Web", "Mobile", "WordPress", "Elementor"],
   },
 ];
@@ -361,7 +364,10 @@ function Portfolio() {
         open={!!selectedProject}
         onOpenChange={(open) => !open && setSelectedProject(null)}
       >
-        <DialogContent className="max-w-4xl p-0 overflow-hidden bg-muted border-none shadow-2xl rounded-2xl">
+        <DialogContent
+          className="max-w-4xl p-0 overflow-hidden bg-muted border-none shadow-2xl rounded-2xl"
+          closeIconColor={selectedProject?.iconColor}
+        >
           {selectedProject && (
             <div className="flex flex-col h-[85vh] md:h-auto md:max-h-[85vh]">
               {/* Image Header */}
