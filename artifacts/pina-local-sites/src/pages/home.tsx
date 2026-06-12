@@ -32,6 +32,7 @@ const portfolioItems = [
       "FITI is an AI-powered revenue execution platform for law firms, consultancies, and professional service firms. It ensures consistent outreach, activates relationships, and creates opportunities before pipeline exists.",
     image: imgFiti,
     iconColor: "#000000",
+    website: "https://fitiprm.com",
     tags: ["Web", "Mobile", "AI", "React", "Tailwind", "Next.js", "Azure"],
   },
   {
@@ -42,6 +43,7 @@ const portfolioItems = [
       "A high-energy sightseeing showcase with integrated booking funnels and dynamic itinerary layouts, built for Comedy on Deck Tours to capture the laughter and scale of their live-entertainment excursions.",
     image: imgComedy,
     iconColor: "#ffffff",
+    website: "https://comedybustours.com/",
     tags: ["Web", "Mobile", "WordPress", "Elementor"],
   },
   {
@@ -52,6 +54,7 @@ const portfolioItems = [
       "A powerful optimization engine with interactive ranking trackers and hands-free profile syncing, engineered for Local Pack Monster to effortlessly demonstrate how their AI agents automate Google Maps visibility.",
     image: imgLpm,
     iconColor: "#ffffff",
+    website: "https://localpackmonster.com/",
     tags: ["Web", "Mobile", "WordPress", "Elementor"],
   },
 ];
@@ -398,16 +401,10 @@ function Portfolio() {
                 </div>
 
                 <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                  {selectedProject.description} Working closely with their team,
-                  we designed a digital experience that reflects their physical
-                  storefront and makes it incredibly easy for customers to
-                  engage with them.
+                  {selectedProject.description}
                 </p>
 
                 <div className="mb-8">
-                  <h4 className="font-bold mb-3 text-sm uppercase tracking-wider text-muted-foreground">
-                    Technologies
-                  </h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedProject.tags.map((tag) => (
                       <span
@@ -424,7 +421,7 @@ function Portfolio() {
                   <Button
                     size="lg"
                     className="rounded-full"
-                    onClick={() => window.open("#", "_blank")}
+                    onClick={() => window.open(selectedProject.website, "_blank")}
                     data-testid="button-visit-site"
                   >
                     Visit Website
