@@ -31,7 +31,7 @@ const portfolioItems = [
     description:
       "FITI is an AI-powered revenue execution platform for law firms, consultancies, and professional service firms. It ensures consistent outreach, activates relationships, and creates opportunities before pipeline exists.",
     image: imgFiti,
-    iconColor: "#aaaaaa",
+    iconColor: "#000000",
     tags: ["Web", "Mobile", "AI", "React", "Tailwind", "Next.js", "Azure"],
   },
   {
