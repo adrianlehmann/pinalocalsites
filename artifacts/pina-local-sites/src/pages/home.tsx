@@ -494,7 +494,7 @@ function Book() {
             </p>
             <Button
               asChild
-              className="w-full rounded-full py-6 text-base font-bold"
+              className="w-full rounded-full py-6 text-base font-bold hover:shadow-xl transition-all hover:-translate-y-1 hover:cursor-pointer hover:text-black"
               data-testid="button-book-calendly"
             >
               <a
