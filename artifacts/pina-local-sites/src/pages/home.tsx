@@ -420,7 +420,7 @@ function Portfolio() {
                 <div className="pt-4 border-t flex justify-end">
                   <Button
                     size="lg"
-                    className="rounded-full"
+                    className="rounded-full cursor-pointer hover:text-black"
                     onClick={() => window.open(selectedProject.website, "_blank")}
                     data-testid="button-visit-site"
                   >
