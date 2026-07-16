@@ -18,7 +18,6 @@ const includedFeatures = [
 
 const optionalEnhancements = [
   "Online Booking Calendar",
-  "Testimonials & Reviews Section",
   "Google Reviews Integration",
   "Custom Logo Design",
 ];
@@ -33,8 +32,9 @@ const tiers = [
     highlightFirst: false,
     features: [
       "Hosting",
+      "Custom Domain",
       "Domain Renewal",
-      "Custom email address",
+      "Custom Email Address",
       "Website Monitoring",
       "Backups",
       "Technical Maintenance",
@@ -155,7 +155,7 @@ export default function YourOffer() {
             </div>
           </div>
         </section>
-
+        {/*
         <section aria-labelledby="enhancements-heading">
           <div className="bg-card border rounded-3xl p-8 shadow-sm">
             <div className="max-w-2xl mb-2">
@@ -191,6 +191,7 @@ export default function YourOffer() {
             </p>
           </div>
         </section>
+        */}
 
         {/* Row 2 — Three pricing tiers */}
         <section aria-labelledby="tiers-heading">
@@ -336,7 +337,7 @@ function TierCard({ tier }: { tier: (typeof tiers)[0] }) {
         </div>
 
         <Button
-          className={`w-full rounded-full font-bold ${
+          className={`w-full rounded-full font-bold cursor-pointer ${
             tier.highlight
               ? "bg-primary-foreground text-primary hover:bg-primary-foreground/90"
               : ""
