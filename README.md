@@ -1,4 +1,4 @@
-# Piña Local Sites
+# Piña Local Sites.
 
 Marketing site for [pinalocalsites.com](https://pinalocalsites.com), built with React and Vite.
 
