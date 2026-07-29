@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import { Check, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import logoPath from "@/assets/images/logo.avif";
 import heroImg from "../assets/images/hero.avif";
 
@@ -271,6 +273,9 @@ export default function YourOffer() {
 }
 
 function TierCard({ tier }: { tier: (typeof tiers)[0] }) {
+  const [agreed, setAgreed] = useState(false);
+  const checkboxId = `commitment-${tier.name.toLowerCase()}`;
+
   return (
     <div
       className={`relative flex flex-col rounded-3xl border p-8 shadow-sm h-full ${
@@ -338,14 +343,56 @@ function TierCard({ tier }: { tier: (typeof tiers)[0] }) {
           </span>
         </div>
 
+        <label
+          htmlFor={checkboxId}
+          className={`flex items-start gap-2.5 mb-4 cursor-pointer text-xs leading-snug ${
+            tier.highlight
+              ? "text-primary-foreground/80"
+              : "text-muted-foreground"
+          }`}
+        >
+          <Checkbox
+            id={checkboxId}
+            checked={agreed}
+            onCheckedChange={(checked) => setAgreed(checked === true)}
+            className={`mt-0.5 ${
+              tier.highlight
+                ? "border-primary-foreground data-[state=checked]:bg-primary-foreground data-[state=checked]:text-primary"
+                : ""
+            }`}
+            data-testid={`checkbox-commitment-${tier.name.toLowerCase()}`}
+          />
+          <span>
+            I understand this plan requires a 12-month minimum commitment and
+            renews month-to-month thereafter. I agree to the{" "}
+            <Link
+              href="/terms-of-service"
+              className={`underline underline-offset-2 ${
+                tier.highlight
+                  ? "text-primary-foreground hover:opacity-80"
+                  : "text-primary hover:underline"
+              }`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              Terms of Service
+            </Link>
+            .
+          </span>
+        </label>
+
         <Button
-          className={`w-full rounded-full font-bold cursor-pointer ${
+          className={`w-full rounded-full font-bold border-0 ${
+            agreed
+              ? "cursor-pointer opacity-100"
+              : "opacity-50 cursor-not-allowed"
+          } ${
             tier.highlight
               ? "bg-primary-foreground text-primary hover:bg-primary-foreground/90"
               : ""
           }`}
           variant={tier.highlight ? "outline" : "default"}
           size="lg"
+          disabled={!agreed}
           data-testid={`button-choose-${tier.name.toLowerCase()}`}
         >
           Choose this plan

@@ -87,7 +87,7 @@ export default function TermsOfService() {
             <h2 className="text-2xl font-bold mb-3">Payments</h2>
 
             <p className="text-muted-foreground leading-relaxed mb-3">
-              Payment terms for any project or ongoing service will be agreed
+              Payment terms for any project or ongoing subscription service will be agreed
               upon separately before work begins.
             </p>
 
@@ -103,6 +103,77 @@ export default function TermsOfService() {
               suspension of services, or termination of agreements.
             </p>
           </section>
+
+          <section>
+            <h2 className="text-2xl font-bold mb-3">Subscription Plans</h2>
+
+            <p className="text-muted-foreground leading-relaxed mb-3">
+              Certain services, including website hosting, maintenance, and
+              support plans, are provided on a recurring subscription basis.
+            </p>
+
+            <p className="text-muted-foreground leading-relaxed mb-3">
+              Unless otherwise agreed in writing, subscription plans require a
+              minimum initial term of twelve (12) months.
+            </p>
+
+            <p className="text-muted-foreground leading-relaxed mb-3">
+              Subscriptions are billed monthly through the selected payment
+              method.
+            </p>
+
+            <p className="text-muted-foreground leading-relaxed mb-3">
+              After the initial 12-month term, subscriptions automatically renew
+              on a month-to-month basis unless canceled by either party with at
+              least 30 days' notice.
+            </p>
+
+            <p className="text-muted-foreground leading-relaxed mb-3">
+              If a client cancels a subscription before the end of the initial
+              12-month term, the remaining balance of the commitment may become
+              immediately due, unless otherwise agreed in writing.
+            </p>
+
+            <p className="text-muted-foreground leading-relaxed">
+              Failure to make subscription payments may result in suspension of
+              hosting, maintenance, website updates, email services, or other
+              recurring services until the account is brought current.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold mb-3">
+              Website Hosting & Ownership
+            </h2>
+
+            <p className="text-muted-foreground leading-relaxed mb-3">
+              Website hosting, maintenance, and related services remain active
+              only while the applicable subscription is active and in good
+              standing. If subscription payments are not maintained, we may
+              suspend hosting, maintenance, business email, and other recurring
+              services after reasonable notice.
+            </p>
+
+            <p className="text-muted-foreground leading-relaxed mb-3">
+              Unless otherwise agreed in writing, the client owns the final
+              website design and content created specifically for their project,
+              subject to full payment of all applicable fees.
+            </p>
+
+            <p className="text-muted-foreground leading-relaxed mb-3">
+              Upon completion of the initial twelve (12) month subscription term
+              and payment of all outstanding balances, clients may request a
+              transfer of their website to another hosting provider or request a
+              copy of the website files, where technically feasible.
+            </p>
+
+            <p className="text-muted-foreground leading-relaxed">
+              Piña Local Sites retains ownership of its proprietary tools,
+              templates, frameworks, code libraries, automation systems, and
+              other non-client-specific assets used in developing the website.
+            </p>
+          </section>
+
           <section>
             <h2 className="text-2xl font-bold mb-3">Refunds & Cancellations</h2>
 
