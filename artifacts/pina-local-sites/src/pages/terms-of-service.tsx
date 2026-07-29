@@ -129,9 +129,7 @@ export default function TermsOfService() {
             </p>
 
             <p className="text-muted-foreground leading-relaxed mb-3">
-              If a client cancels a subscription before the end of the initial
-              12-month term, the remaining balance of the commitment may become
-              immediately due, unless otherwise agreed in writing.
+              If a client cancels a subscription before the end of the initial twelve (12) month term, the client remains responsible for payment of the remaining balance of the initial commitment, unless otherwise agreed in writing.
             </p>
 
             <p className="text-muted-foreground leading-relaxed">
@@ -151,7 +149,7 @@ export default function TermsOfService() {
               only while the applicable subscription is active and in good
               standing. If subscription payments are not maintained, we may
               suspend hosting, maintenance, business email, and other recurring
-              services after reasonable notice.
+              services after at least seven (7) days' written notice.
             </p>
 
             <p className="text-muted-foreground leading-relaxed mb-3">
@@ -205,8 +203,7 @@ export default function TermsOfService() {
                 development.
               </li>
               <li>
-                Final website ownership and transfer terms may be defined in
-                individual project agreements.
+                Website ownership and transfer are governed by the Website Hosting & Ownership section of these Terms, unless otherwise agreed in writing.
               </li>
             </ul>
           </section>
@@ -242,6 +239,16 @@ export default function TermsOfService() {
           </section>
 
           <section>
+            <h2 className="text-2xl font-bold mb-3">Force Majeure</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              Piña Local Sites is not responsible for delays, interruptions, or
+              failures caused by events beyond our reasonable control, including
+              natural disasters, internet outages, acts of government, labor
+              disputes, power outages, or failures of third-party providers.
+            </p>
+          </section>
+
+          <section>
             <h2 className="text-2xl font-bold mb-3">Limitation of Liability</h2>
             <p className="text-muted-foreground leading-relaxed mb-3">
               To the maximum extent permitted by law, Piña Local Sites shall not
@@ -260,6 +267,18 @@ export default function TermsOfService() {
               All content on this Site, including text, graphics, branding, and
               design elements, is owned by or licensed to Piña Local Sites and
               may not be copied or reused without permission.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold mb-3">Content Updates</h2>
+
+            <p className="text-muted-foreground leading-relaxed">
+              Monthly content updates included in subscription plans are
+              intended for reasonable modifications to existing website content.
+              Requests involving significant redesigns, new pages, custom
+              functionality, or extensive content creation may require an
+              additional quote.
             </p>
           </section>
 
@@ -289,9 +308,7 @@ export default function TermsOfService() {
           <section>
             <h2 className="text-2xl font-bold mb-3">Governing Law</h2>
             <p className="text-muted-foreground leading-relaxed">
-              These Terms shall be governed by and interpreted in accordance
-              with the laws applicable in the United States, without regard to
-              conflict of law principles.
+              These Terms shall be governed by the laws of the State of New Mexico, without regard to its conflict of law provisions.
             </p>
           </section>
 
