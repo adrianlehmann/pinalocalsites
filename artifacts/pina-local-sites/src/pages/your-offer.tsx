@@ -7,13 +7,15 @@ import heroImg from "../assets/images/hero.avif";
 const includedFeatures = [
   "Fully custom website design tailored to your brand",  
   "Mobile-friendly, fully responsive layout",
-  "Testimonials & Reviews displayed on website",
-  "Contact form with email notifications",
+  "Testimonials/Reviews displayed on website",
+  "Contact form with instant email notifications",
   "Basic on-page SEO setup",
   "Fast load times — optimized images and clean code",
   "SSL security certificate",
   "Domain connection setup",
   "Launch setup",
+  "Privacy Policy",
+  "Terms of Service",
 ];
 
 const optionalEnhancements = [
@@ -26,7 +28,7 @@ const tiers = [
   {
     name: "Essential",
     tagline: "Perfect for getting online fast",
-    price: "$25",
+    price: "$30",
     period: "/ month",
     highlight: false,
     highlightFirst: false,
@@ -43,7 +45,7 @@ const tiers = [
   {
     name: "Growth",
     tagline: "Most popular for local businesses",
-    price: "$50",
+    price: "$75",
     period: "/ month",
     highlight: true,
     highlightFirst: true,
@@ -60,7 +62,7 @@ const tiers = [
   {
     name: "Premium",
     tagline: "For businesses ready to scale",
-    price: "$75",
+    price: "$100",
     period: "/ month",
     features: [
       "Everything in Growth",
@@ -348,6 +350,15 @@ function TierCard({ tier }: { tier: (typeof tiers)[0] }) {
         >
           Choose this plan
         </Button>
+        <p
+          className={`text-xs italic text-center mt-2 ${
+            tier.highlight
+              ? "text-primary-foreground/70"
+              : "text-muted-foreground"
+          }`}
+        >
+          12-month minimum commitment
+        </p>
       </div>
     </div>
   );
