@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
-import { Check, Star } from "lucide-react";
+import { Check, ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import logoPath from "@/assets/images/logo.avif";
@@ -215,31 +215,11 @@ export default function YourOffer() {
           {/* Desktop: 3 columns */}
           <div className="hidden md:grid md:grid-cols-3 gap-6">
             {tiers.map((tier) => (
-              <TierCard key={tier.name} tier={tier} />
+              <TierCard key={tier.name} tier={tier} idSuffix="desktop" />
             ))}
           </div>
 
-          {/* Mobile: scroll-snap slider, middle card centered */}
-          <div
-            className="md:hidden flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth"
-            style={{
-              paddingLeft: "10%",
-              paddingRight: "10%",
-              scrollPaddingLeft: "10%",
-            }}
-            data-testid="slider-tiers"
-          >
-            {tiers.map((tier, idx) => (
-              <div key={tier.name} className="snap-center shrink-0 w-[80vw]">
-                <TierCard tier={tier} />
-              </div>
-            ))}
-          </div>
-
-          {/* Mobile swipe hint */}
-          <p className="md:hidden text-center text-sm text-muted-foreground mt-3">
-            Swipe to see all plans
-          </p>
+          <MobileTierSlider />
 
           {/* Custom redesign hint */}
           <p className="text-center text-sm text-muted-foreground mt-8">
@@ -272,21 +252,125 @@ export default function YourOffer() {
   );
 }
 
-function TierCard({ tier }: { tier: (typeof tiers)[0] }) {
+function MobileTierSlider() {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(1);
+
+  const scrollToIndex = (index: number, behavior: ScrollBehavior = "smooth") => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+    const card = scroller.children[index] as HTMLElement | undefined;
+    if (!card) return;
+    const target =
+      card.offsetLeft - (scroller.clientWidth - card.offsetWidth) / 2;
+    scroller.scrollTo({ left: Math.max(0, target), behavior });
+    setActiveIndex(index);
+  };
+
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+    if (!window.matchMedia("(max-width: 767px)").matches) return;
+
+    const centerMiddle = () => scrollToIndex(1, "auto");
+    centerMiddle();
+    requestAnimationFrame(centerMiddle);
+  }, []);
+
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+
+    const updateActiveIndex = () => {
+      const cards = Array.from(scroller.children) as HTMLElement[];
+      const center = scroller.scrollLeft + scroller.clientWidth / 2;
+      let closest = 0;
+      let minDist = Infinity;
+      cards.forEach((card, i) => {
+        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        const dist = Math.abs(cardCenter - center);
+        if (dist < minDist) {
+          minDist = dist;
+          closest = i;
+        }
+      });
+      setActiveIndex(closest);
+    };
+
+    scroller.addEventListener("scroll", updateActiveIndex, { passive: true });
+    return () => scroller.removeEventListener("scroll", updateActiveIndex);
+  }, []);
+
+  return (
+    <div className="md:hidden relative">
+      {activeIndex > 0 && (
+        <button
+          type="button"
+          aria-label="Previous plan"
+          onClick={() => scrollToIndex(activeIndex - 1)}
+          className="absolute left-0 top-1/2 z-10 -translate-y-1/2 bg-background/90 border shadow-sm hover:bg-background p-2 rounded-full transition-colors"
+          data-testid="button-tier-prev"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+      )}
+      {activeIndex < tiers.length - 1 && (
+        <button
+          type="button"
+          aria-label="Next plan"
+          onClick={() => scrollToIndex(activeIndex + 1)}
+          className="absolute right-0 top-1/2 z-10 -translate-y-1/2 bg-background/90 border shadow-sm hover:bg-background p-2 rounded-full transition-colors"
+          data-testid="button-tier-next"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
+      )}
+
+      <div
+        ref={scrollerRef}
+        className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        style={{
+          paddingLeft: "10%",
+          paddingRight: "10%",
+          scrollPaddingInline: "10%",
+        }}
+        data-testid="slider-tiers"
+      >
+        {tiers.map((tier) => (
+          <div key={tier.name} className="snap-center shrink-0 w-[80vw]">
+            <TierCard tier={tier} idSuffix="mobile" />
+          </div>
+        ))}
+      </div>
+
+      <p className="text-center text-sm text-muted-foreground mt-3">
+        Swipe or use arrows to see all plans
+      </p>
+    </div>
+  );
+}
+
+function TierCard({
+  tier,
+  idSuffix,
+}: {
+  tier: (typeof tiers)[0];
+  idSuffix: string;
+}) {
   const [agreed, setAgreed] = useState(false);
-  const checkboxId = `commitment-${tier.name.toLowerCase()}`;
+  const checkboxId = `commitment-${tier.name.toLowerCase()}-${idSuffix}`;
 
   return (
     <div
       className={`relative flex flex-col rounded-3xl border p-8 shadow-sm h-full ${
         tier.highlight
-          ? "bg-primary text-primary-foreground border-primary shadow-xl scale-[1.02]"
+          ? "bg-primary text-primary-foreground border-primary shadow-xl"
           : "bg-card"
       }`}
-      data-testid={`card-tier-${tier.name.toLowerCase()}`}
+      data-testid={`card-tier-${tier.name.toLowerCase()}-${idSuffix}`}
     >
       {tier.highlight && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-foreground text-background text-xs font-bold uppercase tracking-wider px-4 py-1 rounded-full whitespace-nowrap">
+        <div className="absolute top-[10px] left-1/2 -translate-x-1/2 bg-foreground text-background text-xs font-bold uppercase tracking-wider px-4 py-1 rounded-full whitespace-nowrap">
           Most Popular
         </div>
       )}
@@ -360,7 +444,7 @@ function TierCard({ tier }: { tier: (typeof tiers)[0] }) {
                 ? "border-primary-foreground data-[state=checked]:bg-primary-foreground data-[state=checked]:text-primary"
                 : ""
             }`}
-            data-testid={`checkbox-commitment-${tier.name.toLowerCase()}`}
+            data-testid={`checkbox-commitment-${tier.name.toLowerCase()}-${idSuffix}`}
           />
           <span>
             I understand this plan requires a 12-month minimum commitment and
@@ -393,7 +477,7 @@ function TierCard({ tier }: { tier: (typeof tiers)[0] }) {
           variant={tier.highlight ? "outline" : "default"}
           size="lg"
           disabled={!agreed}
-          data-testid={`button-choose-${tier.name.toLowerCase()}`}
+          data-testid={`button-choose-${tier.name.toLowerCase()}-${idSuffix}`}
         >
           Choose this plan
         </Button>
