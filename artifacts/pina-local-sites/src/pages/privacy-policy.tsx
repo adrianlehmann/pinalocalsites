@@ -179,7 +179,7 @@ export default function PrivacyPolicy() {
               <p className="font-medium text-foreground">
                 HealthyDigital LLC d/b/a Piña Local Sites
               </p>
-              <p>Adrian Lehmann</p>
+              <p>Adrian Lehmann, CEO & Founder</p>
               <p>
                 <a
                   href="mailto:adrian@pinalocalsites.com"
