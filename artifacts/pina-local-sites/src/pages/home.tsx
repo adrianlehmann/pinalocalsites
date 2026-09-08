@@ -202,10 +202,7 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="max-w-2xl"
-        >
-          <div className="inline-block bg-secondary/20 text-secondary-foreground px-4 py-1.5 rounded-full text-sm font-bold tracking-wide mb-6">
-            Boutique Web Design Studio
-          </div>
+        >          
           <h1 className="text-5xl md:text-7xl font-serif font-bold text-foreground leading-[1.1] tracking-tight mb-6">
             Beautiful websites for{" "}
             <span className="text-primary italic">local businesses</span>.
@@ -303,8 +300,43 @@ function Portfolio() {
     (typeof portfolioItems)[0] | null
   >(null);
 
-  // For the infinite scroll, we duplicate the array
-  const scrollItems = [...portfolioItems, ...portfolioItems];
+  // Repeat enough times so each half of the track always fills the viewport
+  // (needed for a seamless -50% translate loop on wide screens).
+  const loopSet = Array.from({ length: 4 }, () => portfolioItems).flat();
+
+  const renderCards = (keyPrefix: string, ariaHidden = false) =>
+    loopSet.map((item, i) => (
+      <div
+        key={`${keyPrefix}-${item.id}-${i}`}
+        className="w-[300px] md:w-[400px] shrink-0 px-4"
+        onClick={() => setSelectedProject(item)}
+        aria-hidden={ariaHidden || undefined}
+      >
+        <div
+          className="group relative rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border bg-card"
+          data-testid={
+            ariaHidden ? undefined : `card-portfolio-${item.id}`
+          }
+        >
+          <div className="aspect-[4/3] overflow-hidden">
+            <img
+              src={item.image}
+              alt={ariaHidden ? "" : item.name}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+          <div className="p-5">
+            <div className="text-xs font-bold text-primary mb-1 uppercase tracking-wider">
+              {item.type}
+            </div>
+            <h3 className="text-xl font-bold">{item.name}</h3>
+            <p className="text-muted-foreground text-sm mt-2 line-clamp-2">
+              {item.description}
+            </p>
+          </div>
+        </div>
+      </div>
+    ));
 
   return (
     <section id="portfolio" className="py-24 bg-background overflow-hidden">
@@ -330,35 +362,10 @@ function Portfolio() {
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
         <div className="flex w-max animate-infinite-scroll">
-          {scrollItems.map((item, i) => (
-            <div
-              key={`${item.id}-${i}`}
-              className="w-[300px] md:w-[400px] shrink-0 px-4"
-              onClick={() => setSelectedProject(item)}
-            >
-              <div
-                className="group relative rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border bg-card"
-                data-testid={`card-portfolio-${item.id}`}
-              >
-                <div className="aspect-[4/3] overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-5">
-                  <div className="text-xs font-bold text-primary mb-1 uppercase tracking-wider">
-                    {item.type}
-                  </div>
-                  <h3 className="text-xl font-bold">{item.name}</h3>
-                  <p className="text-muted-foreground text-sm mt-2 line-clamp-2">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
+          <div className="flex shrink-0">{renderCards("a")}</div>
+          <div className="flex shrink-0" aria-hidden="true">
+            {renderCards("b", true)}
+          </div>
         </div>
       </div>
 
