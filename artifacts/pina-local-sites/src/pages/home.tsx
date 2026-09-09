@@ -7,8 +7,6 @@ import {
   Laptop,
   Smartphone,
   Wrench,
-  ChevronLeft,
-  ChevronRight,
   CheckCircle2,
   Mail,
 } from "lucide-react";
@@ -17,6 +15,11 @@ import heroImg from "../assets/images/hero.avif";
 import imgFiti from "../assets/images/portfolio-fiti.png";
 import imgComedy from "../assets/images/portfolio-comedy.png";
 import imgLpm from "../assets/images/portfolio-lpm.png";
+import imgConversion from "../assets/images/portfolio-conversion.png";
+import imgLivingOcean from "../assets/images/portfolio-livingocean.png";
+import imgSnorkelTurtleCanyon from "../assets/images/portfolio-snorkelturtlecanyon.png";
+import imgSunsetSail from "../assets/images/portfolio-sunsetsail.png";
+import imgWaikiki from "../assets/images/portfolio-waikiki.png";
 
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
@@ -56,6 +59,61 @@ const portfolioItems = [
     iconColor: "#ffffff",
     website: "https://localpackmonster.com/",
     tags: ["Web", "Mobile", "WordPress", "Elementor"],
+  },
+  {
+    id: "conversion",
+    name: "Conversion Consulting",
+    type: "Digital Marketing Agency",
+    description:
+      "A conversion-focused marketing site for tour operators and water sports companies, highlighting free audits, paid media, and booking-growth services with clear calls to action and case-driven storytelling.",
+    image: imgConversion,
+    iconColor: "#ffffff",
+    website: "https://increasewebconversions.com/",
+    tags: ["Web", "Mobile", "WordPress", "Hosting"],
+  },
+  {
+    id: "livingocean",
+    name: "Living Ocean Tours",
+    type: "Snorkel & Cruise Tours",
+    description:
+      "Oahu’s top-rated snorkel and sunset cruise experience, featuring Turtle Canyon adventures, wildlife cruises, and easy online booking for families exploring Honolulu’s coastline.",
+    image: imgLivingOcean,
+    iconColor: "#ffffff",
+    website: "https://livingoceantours.com/",
+    tags: ["Web", "Mobile", "WordPress", "Hosting"],
+  },
+  {
+    id: "snorkelturtlecanyon",
+    name: "Snorkel Turtle Canyon",
+    type: "Waikiki Snorkeling Tours",
+    description:
+      "A focused booking site for premier Turtle Canyon snorkel tours in Waikiki, built to showcase Hawaiian green sea turtles, tour details, and guided boat adventures for all skill levels.",
+    image: imgSnorkelTurtleCanyon,
+    iconColor: "#ffffff",
+    website: "https://snorkelturtlecanyon.com/",
+    tags: ["Web", "Mobile", "WordPress", "Hosting"],
+  },
+  {
+    id: "sunsetsail",
+    name: "Sunset Sail",
+    type: "Sunset Sailing Experiences",
+    description:
+      "Authentic dusk sailing adventures across Key West and Salem, with shared sails, private charters, and a classic fleet experience designed for romance, relaxation, and ocean views.",
+    image: imgSunsetSail,
+    iconColor: "#ffffff",
+    website: "https://sunsetsailusa.com/",
+    tags: ["Web", "Mobile", "WordPress", "Hosting"],
+  },
+  {
+    id: "waikiki",
+    name: "Sunset Cruise Waikiki",
+    type: "Waikiki Sunset Cruises",
+    description:
+      "Daily Waikiki sunset cruises with BYOB and cash bar options, Friday fireworks sailings, and an intimate 45-guest vessel experience along Honolulu’s coastline.",
+    image: imgWaikiki,
+    iconColor: "#ffffff",
+    website: "https://sunsetcruisewaikiki.com/",
+    tags: ["Web", "Mobile", "WordPress", "Hosting"],
   },
 ];
 
@@ -387,15 +445,6 @@ function Portfolio() {
                   alt={selectedProject.name}
                   className="w-full h-full object-cover"
                 />
-                {/* Simulated gallery arrows */}
-                <div className="absolute inset-0 flex items-center justify-between p-4 pointer-events-none">
-                  <button className="pointer-events-auto bg-background/50 hover:bg-background backdrop-blur p-2 rounded-full transition-colors">
-                    <ChevronLeft className="w-6 h-6" />
-                  </button>
-                  <button className="pointer-events-auto bg-background/50 hover:bg-background backdrop-blur p-2 rounded-full transition-colors">
-                    <ChevronRight className="w-6 h-6" />
-                  </button>
-                </div>
               </div>
 
               {/* Content */}
