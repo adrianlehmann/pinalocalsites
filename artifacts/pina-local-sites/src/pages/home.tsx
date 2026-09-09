@@ -7,19 +7,21 @@ import {
   Laptop,
   Smartphone,
   Wrench,
+  Search,
+  Gauge,
   CheckCircle2,
   Mail,
 } from "lucide-react";
 import logoPath from "@/assets/images/logo.avif";
 import heroImg from "../assets/images/hero.avif";
-import imgFiti from "../assets/images/portfolio-fiti.png";
-import imgComedy from "../assets/images/portfolio-comedy.png";
-import imgLpm from "../assets/images/portfolio-lpm.png";
-import imgConversion from "../assets/images/portfolio-conversion.png";
-import imgLivingOcean from "../assets/images/portfolio-livingocean.png";
-import imgSnorkelTurtleCanyon from "../assets/images/portfolio-snorkelturtlecanyon.png";
-import imgSunsetSail from "../assets/images/portfolio-sunsetsail.png";
-import imgWaikiki from "../assets/images/portfolio-waikiki.png";
+import imgFiti from "../assets/images/portfolio-fiti.avif";
+import imgComedy from "../assets/images/portfolio-comedy.avif";
+import imgLpm from "../assets/images/portfolio-lpm.avif";
+import imgConversion from "../assets/images/portfolio-conversion.avif";
+import imgLivingOcean from "../assets/images/portfolio-livingocean.avif";
+import imgSnorkelTurtleCanyon from "../assets/images/portfolio-snorkelturtlecanyon.avif";
+import imgSunsetSail from "../assets/images/portfolio-sunsetsail.avif";
+import imgWaikiki from "../assets/images/portfolio-waikiki.avif";
 
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
@@ -172,7 +174,7 @@ function Header() {
             className="text-sm font-bold hover:text-primary transition-colors cursor-pointer"
             data-testid="link-nav-what-we-do"
           >
-            What We Do
+            What I Do
           </button>
           <button
             onClick={() => scrollTo("portfolio")}
@@ -214,7 +216,7 @@ function Header() {
               className="text-lg font-medium p-2 text-left hover:cursor-pointer hover:text-primary rounded-md transition-colors"
               data-testid="link-mobile-what-we-do"
             >
-              What We Do
+              What I Do
             </button>
             <button
               onClick={() => scrollTo("portfolio")}
@@ -266,9 +268,9 @@ function Hero() {
             <span className="text-primary italic">local businesses</span>.
           </h1>
           <p className="text-lg md:text-xl text-foreground/80 mb-10 leading-relaxed max-w-xl">
-            We are your talented neighbors building custom, mobile-first
-            websites that turn local visitors into loyal customers. No
-            templates, just craft.
+            I'm your talented neighbor building custom, mobile-first websites
+            that turn local visitors into loyal customers — with a sharp focus
+            on SEO and performance. No templates, just craft.
           </p>
           <Button
             size="lg"
@@ -294,19 +296,31 @@ function WhatWeDo() {
       icon: <Laptop className="w-10 h-10 text-primary" />,
       title: "Custom Website Design",
       description:
-        "We design beautiful, unique websites tailored to your brand and local audience. Your business isn't generic, your site shouldn't be either.",
+        "I design beautiful, unique websites tailored to your brand and local audience. Your business isn't generic, your site shouldn't be either.",
     },
     {
       icon: <Smartphone className="w-10 h-10 text-primary" />,
       title: "Mobile-First Development",
       description:
-        "Every site we build looks perfect on phones, tablets, and desktops. We ensure your customers have a seamless experience anywhere.",
+        "Every site I build looks perfect on phones, tablets, and desktops. Your customers get a seamless experience anywhere.",
+    },
+    {
+      icon: <Search className="w-10 h-10 text-primary" />,
+      title: "SEO & Local Visibility",
+      description:
+        "I build with search in mind — clean structure, on-page SEO, and local signals that help customers find you on Google.",
+    },
+    {
+      icon: <Gauge className="w-10 h-10 text-primary" />,
+      title: "Website Performance",
+      description:
+        "Fast load times aren't optional. I optimize images, code, and hosting so your site feels snappy and converts better.",
     },
     {
       icon: <Wrench className="w-10 h-10 text-primary" />,
       title: "Ongoing Support & Maintenance",
       description:
-        "We don't just launch and leave — we're here to keep your site running smooth, updated, and secure.",
+        "I don't just launch and leave — I'm here to keep your site running smooth, updated, and secure.",
     },
   ];
 
@@ -320,22 +334,22 @@ function WhatWeDo() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">
-            What We Do
+            What I Do
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            We handle the technical heavy lifting so you can focus on running
-            your business.
+            I handle the technical heavy lifting — design, SEO, and performance
+            — so you can focus on running your business.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((s, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.2 }}
+              transition={{ delay: i * 0.1 }}
               className="bg-background border rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="bg-primary/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
@@ -405,10 +419,10 @@ function Portfolio() {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">
-            Our Work
+            My Work
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl">
-            A selection of recent websites crafted for local businesses.
+            A selection of recent websites I've crafted for local businesses.
           </p>
         </motion.div>
       </div>
@@ -510,9 +524,9 @@ function Book() {
               Ready to stand out locally?
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Book a free consultation today. We'll discuss your business goals,
-              review your current online presence, and show you how a custom
-              website can drive more local traffic.
+              Book a free consultation today. I'll discuss your business goals,
+              review your current online presence, and show you how a custom,
+              SEO-ready website can drive more local traffic.
             </p>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
@@ -542,7 +556,7 @@ function Book() {
           >
             <h3 className="text-2xl font-bold mb-4">Book a Consultation</h3>
             <p className="text-muted-foreground mb-8">
-              Pick a time that works for you. You'll be taken to our Calendly
+              Pick a time that works for you. You'll be taken to my Calendly
               page to schedule your free 30-minute discovery call.
             </p>
             <Button
@@ -583,9 +597,9 @@ function Footer() {
               </span>
             </div>
             <p className="text-muted max-w-sm">
-              We build beautiful, fast, and highly-converting custom websites
-              for local businesses. Your digital business card, crafted with
-              care.
+              I build beautiful, fast, and highly-converting custom websites for
+              local businesses — with SEO and performance built in from day one.
+              Your digital business card, crafted with care.
             </p>
             <p className="text-sm text-muted mt-4">
               Piña Local Sites is operated by HealthyDigital LLC.
@@ -605,7 +619,7 @@ function Footer() {
                 }
                 className="text-muted hover:text-primary transition-colors hover:cursor-pointer text-left"
               >
-                What We Do
+                What I Do
               </button>
               <button
                 onClick={() =>
