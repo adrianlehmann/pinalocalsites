@@ -29,7 +29,7 @@ const optionalEnhancements = [
 const tiers = [
   {
     name: "Essential",
-    tagline: "Perfect for getting online fast",
+    tagline: "Perfect for getting online and staying online",
     price: "$30",
     period: "/ month",
     highlight: false,
@@ -53,18 +53,17 @@ const tiers = [
     highlightFirst: true,
     features: [
       "Everything in Essential",
-      "Monthly content edits",
-      "Monthly image updates/replacements",
-      "Monthly website health check",
+      "Monthly content and image updates",
+      "Monthly website performance check",
+      "Monthly performance optimization",
       "Priority support",
-      "48-hour turnaround on update requests",
-      "Performance optimization checks",
+      "48-hour turnaround on update requests",      
     ],
   },
   {
     name: "Premium",
-    tagline: "For businesses ready to scale",
-    price: "$100",
+    tagline: "For businesses that want ongoing growth",
+    price: "$125",
     period: "/ month",
     features: [
       "Everything in Growth",
@@ -451,8 +450,7 @@ function TierCard({
             data-testid={`checkbox-commitment-${tier.name.toLowerCase()}-${idSuffix}`}
           />
           <span>
-            I understand this plan requires a 12-month minimum commitment and
-            renews month-to-month thereafter. I agree to the{" "}
+          I understand this plan has a 12-month minimum commitment and agree to the {" "}
             <Link
               href="/terms-of-service"
               className={`underline underline-offset-2 ${
