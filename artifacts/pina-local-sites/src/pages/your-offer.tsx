@@ -36,7 +36,7 @@ const tiers = [
     highlightFirst: false,
     features: [
       "Hosting",
-      "Custom Domain",
+      "Custom Domain*",
       "Domain Renewal",
       "Custom Email Address",
       "Website Monitoring",
@@ -145,7 +145,7 @@ export default function YourOffer() {
             </ul>
             <div className="flex items-end justify-end gap-3 mt-6">
               <span className="text-2xl md:text-4xl font-bold tracking-tight">
-                $500
+                $250
               </span>
 
               <span className="text-muted-foreground mb-1">
@@ -222,9 +222,13 @@ export default function YourOffer() {
           <MobileTierSlider />
 
           {/* Custom redesign hint */}
-          <p className="text-center text-sm text-muted-foreground mt-8">
-            Custom functionality and major redesigns quoted separately.
-          </p>
+          <div className="mt-8 space-y-2 text-center text-sm text-muted-foreground">
+            <p>
+              * Custom Domain: you'll choose from 3 domain options I select for
+              your business.
+            </p>
+            <p>Custom functionality and major redesigns quoted separately.</p>
+          </div>
         </section>
       </main>
 
