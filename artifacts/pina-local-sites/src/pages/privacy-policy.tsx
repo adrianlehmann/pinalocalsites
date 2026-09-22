@@ -1,9 +1,31 @@
 import { Link } from "wouter";
 import logoPath from "@/assets/images/logo.avif";
+import { Seo } from "@/components/Seo";
+import {
+  PAGE_SEO,
+  breadcrumbJsonLd,
+  webPageJsonLd,
+} from "@/lib/seo";
 
 export default function PrivacyPolicy() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      webPageJsonLd({
+        title: PAGE_SEO.privacy.title,
+        description: PAGE_SEO.privacy.description,
+        path: PAGE_SEO.privacy.path,
+      }),
+      breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Privacy Policy", path: "/privacy-policy" },
+      ]),
+    ],
+  };
+
   return (
     <div className="min-h-[100dvh] flex flex-col bg-background text-foreground">
+      <Seo {...PAGE_SEO.privacy} jsonLd={jsonLd} />
       <header className="border-b py-4 px-6 flex items-center gap-3">
         <Link
           href="/"

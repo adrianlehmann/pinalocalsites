@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
 
+# Private / generated routes — still reachable by users, but not for indexing
+Disallow: /your-offer
+Disallow: /website-analysis/
+
+# Allow the main analysis landing page (exact path is Allow by default under Allow: /)
+# Disallow: /website-analysis/ only blocks result URLs with an audit ID segment.
+
 Sitemap: https://pinalocalsites.com/sitemap.xml

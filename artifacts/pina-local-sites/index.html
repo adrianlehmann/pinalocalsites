@@ -2,56 +2,87 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Piña Local Sites | Website Analysis, SEO & Local Business Websites</title>
+    <title>Piña Local Sites | Website Analysis, SEO & Local Websites</title>
     <link rel="canonical" href="https://pinalocalsites.com/" />
 
     <meta
       name="description"
-      content="I help local businesses get found online. Free website analysis, custom websites, SEO, Google Business Profile, and Google Ads improvements — by an independent developer."
-    />
-    <meta
-      name="keywords"
-      content="local business websites, website analysis, local SEO, Google Business Profile, Google Ads audit, small business web design, website performance"
+      content="I help local businesses get found online — free website analysis, custom websites, SEO, Google Business Profile, and Google Ads improvements."
     />
     <meta name="robots" content="index, follow" />
+    <meta name="author" content="Adrian Lehmann" />
+    <meta name="theme-color" content="#f97316" />
 
-    <meta property="og:title" content="Piña Local Sites | Analyze, Build & Improve Your Online Presence" />
+    <meta property="og:title" content="Piña Local Sites | Website Analysis, SEO & Local Websites" />
     <meta
       property="og:description"
       content="Find out what's holding your local business back online. Free website analysis, custom websites, SEO, and Google presence help."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://pinalocalsites.com" />
+    <meta property="og:url" content="https://pinalocalsites.com/" />
     <meta property="og:site_name" content="Piña Local Sites" />
+    <meta property="og:image" content="https://pinalocalsites.com/opengraph.jpg" />
+    <meta property="og:locale" content="en_US" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Piña Local Sites | Website Analysis, SEO & Local Business Websites" />
+    <meta name="twitter:title" content="Piña Local Sites | Website Analysis, SEO & Local Websites" />
     <meta
       name="twitter:description"
-      content="I help local businesses get found online. Free website analysis, custom websites, SEO, and Google presence improvements."
+      content="I help local businesses get found online — free website analysis, custom websites, SEO, and Google presence improvements."
     />
+    <meta name="twitter:image" content="https://pinalocalsites.com/opengraph.jpg" />
 
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Piña Local Sites",
-      "url": "https://pinalocalsites.com",
-      "email": "adrian@pinalocalsites.com",
-      "telephone": "+1-808-515-5573",
-      "description": "Independent developer helping local businesses analyze, build, and improve their online presence — websites, SEO, Google Business Profile, and Google Ads.",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "1209 Mountain Road Pl NE Ste N",
-        "addressLocality": "Albuquerque",
-        "addressRegion": "NM",
-        "postalCode": "87110",
-        "addressCountry": "US"
-      },
-      "areaServed": "US",
-      "sameAs": []
+      "@graph": [
+        {
+          "@type": ["ProfessionalService", "LocalBusiness"],
+          "@id": "https://pinalocalsites.com/#business",
+          "name": "Piña Local Sites",
+          "legalName": "HealthyDigital LLC",
+          "url": "https://pinalocalsites.com/",
+          "email": "adrian@pinalocalsites.com",
+          "telephone": "+1-808-515-5573",
+          "description": "Independent developer helping local businesses analyze, build, and improve their online presence — custom websites, SEO, Google Business Profile, and Google Ads.",
+          "image": "https://pinalocalsites.com/opengraph.jpg",
+          "logo": "https://pinalocalsites.com/favicon.svg",
+          "founder": {
+            "@type": "Person",
+            "name": "Adrian Lehmann"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "1209 Mountain Road Pl NE, Ste N",
+            "addressLocality": "Albuquerque",
+            "addressRegion": "NM",
+            "postalCode": "87110",
+            "addressCountry": "US"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "United States"
+          },
+          "knowsAbout": [
+            "Website design",
+            "Local SEO",
+            "Website analysis",
+            "Google Business Profile optimization",
+            "Google Ads analysis",
+            "Website performance"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://pinalocalsites.com/#website",
+          "url": "https://pinalocalsites.com/",
+          "name": "Piña Local Sites",
+          "publisher": { "@id": "https://pinalocalsites.com/#business" },
+          "inLanguage": "en-US"
+        }
+      ]
     }
     </script>
 
@@ -60,9 +91,13 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="root"></div>

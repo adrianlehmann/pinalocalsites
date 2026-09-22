@@ -33,6 +33,15 @@ import {
   AuditScore,
   AuditFinding,
 } from "@/components/audit";
+import { Seo } from "@/components/Seo";
+import {
+  HOME_FAQS,
+  PAGE_SEO,
+  faqPageJsonLd,
+  organizationJsonLd,
+  webPageJsonLd,
+  BUSINESS,
+} from "@/lib/seo";
 
 // --- Types & Data ---
 
@@ -268,6 +277,8 @@ function Hero() {
           src={heroImg}
           alt=""
           aria-hidden="true"
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/40 dark:from-background dark:via-background/90 dark:to-background/50" />
@@ -386,7 +397,7 @@ function HoldingYouBack() {
               <div className="bg-primary/10 w-12 h-12 rounded-xl flex items-center justify-center mb-5">
                 {item.icon}
               </div>
-              <h3 className="text-lg font-bold mb-2 uppercase tracking-wide text-sm">
+              <h3 className="text-sm font-bold mb-2 uppercase tracking-wide">
                 {item.title}
               </h3>
               <p className="text-muted-foreground leading-relaxed">
@@ -818,6 +829,8 @@ function Portfolio() {
             <img
               src={item.image}
               alt={ariaHidden ? "" : `${item.name} website screenshot`}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           </div>
@@ -924,6 +937,55 @@ function Portfolio() {
           )}
         </DialogContent>
       </Dialog>
+    </section>
+  );
+}
+
+function Faq() {
+  return (
+    <section id="faq" className="py-24 bg-background">
+      <div className="container mx-auto px-4 md:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto"
+        >
+          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4 text-center">
+            Common questions
+          </h2>
+          <p className="text-muted-foreground text-lg text-center mb-12">
+            Straight answers about websites, analysis, and improving your online
+            presence.
+          </p>
+
+          <div className="space-y-4">
+            {HOME_FAQS.map((faq, i) => (
+              <motion.details
+                key={faq.question}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="group rounded-2xl border bg-card px-6 py-5 open:shadow-sm"
+              >
+                <summary className="cursor-pointer list-none font-bold text-lg flex items-start justify-between gap-4">
+                  <span>{faq.question}</span>
+                  <span
+                    className="text-primary shrink-0 transition-transform group-open:rotate-45"
+                    aria-hidden
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="text-muted-foreground leading-relaxed mt-4 pr-8">
+                  {faq.answer}
+                </p>
+              </motion.details>
+            ))}
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 }
@@ -1082,6 +1144,31 @@ function Footer() {
               presence — websites, SEO, Google Business Profile, and more. Build
               it, analyze it, improve it.
             </p>
+            <address className="not-italic text-sm text-muted mt-4 space-y-1">
+              <p>{BUSINESS.founder}</p>
+              <p>
+                <a
+                  className="hover:text-primary transition-colors"
+                  href={`mailto:${BUSINESS.email}`}
+                >
+                  {BUSINESS.email}
+                </a>
+              </p>
+              <p>
+                <a
+                  className="hover:text-primary transition-colors"
+                  href={`tel:${BUSINESS.phone}`}
+                >
+                  {BUSINESS.phoneDisplay}
+                </a>
+              </p>
+              <p>
+                {BUSINESS.streetAddress}
+                <br />
+                {BUSINESS.addressLocality}, {BUSINESS.addressRegion}{" "}
+                {BUSINESS.postalCode}
+              </p>
+            </address>
             <p className="text-sm text-muted mt-4">
               Piña Local Sites is operated by HealthyDigital LLC.
             </p>
@@ -1135,12 +1222,18 @@ function Footer() {
             <h4 className="font-bold mb-6 uppercase tracking-wider text-sm text-primary">
               Contact
             </h4>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col gap-2">
               <a
                 className="hover:text-primary transition-colors"
-                href="mailto:adrian@pinalocalsites.com"
+                href={`mailto:${BUSINESS.email}`}
               >
-                adrian@pinalocalsites.com
+                {BUSINESS.email}
+              </a>
+              <a
+                className="hover:text-primary transition-colors"
+                href={`tel:${BUSINESS.phone}`}
+              >
+                {BUSINESS.phoneDisplay}
               </a>
             </div>
           </div>
@@ -1152,18 +1245,18 @@ function Footer() {
             reserved.
           </p>
           <div className="flex gap-6">
-            <a
+            <Link
               href="/privacy-policy"
               className="hover:text-background transition-colors"
             >
               Privacy Policy
-            </a>
-            <a
+            </Link>
+            <Link
               href="/terms-of-service"
               className="hover:text-background transition-colors"
             >
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -1172,8 +1265,22 @@ function Footer() {
 }
 
 export default function Home() {
+  const homeJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      ...organizationJsonLd()["@graph"],
+      webPageJsonLd({
+        title: PAGE_SEO.home.title,
+        description: PAGE_SEO.home.description,
+        path: PAGE_SEO.home.path,
+      }),
+      faqPageJsonLd([...HOME_FAQS]),
+    ],
+  };
+
   return (
     <div className="min-h-[100dvh] flex flex-col">
+      <Seo {...PAGE_SEO.home} jsonLd={homeJsonLd} />
       <Header />
       <main className="flex-1">
         <Hero />
@@ -1183,6 +1290,7 @@ export default function Home() {
         <AnalysisTool />
         <ExampleAudit />
         <Portfolio />
+        <Faq />
         <FinalCTA />
         <Book />
       </main>

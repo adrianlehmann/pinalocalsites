@@ -1,28 +1,43 @@
+import { lazy, Suspense } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
-import PrivacyPolicy from "@/pages/privacy-policy";
-import TermsOfService from "@/pages/terms-of-service";
-import YourOffer from "@/pages/your-offer";
-import WebsiteAnalysis from "@/pages/website-analysis";
-import WebsiteAnalysisResult from "@/pages/website-analysis-result";
+
+const NotFound = lazy(() => import("@/pages/not-found"));
+const PrivacyPolicy = lazy(() => import("@/pages/privacy-policy"));
+const TermsOfService = lazy(() => import("@/pages/terms-of-service"));
+const YourOffer = lazy(() => import("@/pages/your-offer"));
+const WebsiteAnalysis = lazy(() => import("@/pages/website-analysis"));
+const WebsiteAnalysisResult = lazy(
+  () => import("@/pages/website-analysis-result"),
+);
 
 const queryClient = new QueryClient();
 
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/privacy-policy" component={PrivacyPolicy} />
-      <Route path="/terms-of-service" component={TermsOfService} />
-      <Route path="/your-offer" component={YourOffer} />
-      <Route path="/website-analysis/:auditId" component={WebsiteAnalysisResult} />
-      <Route path="/website-analysis" component={WebsiteAnalysis} />
-      <Route component={NotFound} />
-    </Switch>
+    <Suspense
+      fallback={
+        <div className="min-h-[40vh] flex items-center justify-center text-muted-foreground">
+          Loading…
+        </div>
+      }
+    >
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/privacy-policy" component={PrivacyPolicy} />
+        <Route path="/terms-of-service" component={TermsOfService} />
+        <Route path="/your-offer" component={YourOffer} />
+        <Route
+          path="/website-analysis/:auditId"
+          component={WebsiteAnalysisResult}
+        />
+        <Route path="/website-analysis" component={WebsiteAnalysis} />
+        <Route component={NotFound} />
+      </Switch>
+    </Suspense>
   );
 }
 

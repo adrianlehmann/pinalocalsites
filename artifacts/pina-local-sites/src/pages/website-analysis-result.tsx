@@ -4,6 +4,8 @@ import { ArrowLeft } from "lucide-react";
 import logoPath from "@/assets/images/logo.avif";
 import { AuditProgress, AuditCTA } from "@/components/audit";
 import { getAudit, type AuditResult, type AuditStatus } from "@/lib/audit";
+import { Seo } from "@/components/Seo";
+import { PAGE_SEO } from "@/lib/seo";
 
 const POLL_INTERVAL_MS = 2500;
 
@@ -54,6 +56,10 @@ export default function WebsiteAnalysisResult() {
 
   return (
     <div className="min-h-[100dvh] flex flex-col bg-background text-foreground">
+      <Seo
+        {...PAGE_SEO.websiteAnalysisResult}
+        path={`/website-analysis/${auditId || "result"}`}
+      />
       <header className="border-b py-4 px-6 flex items-center gap-3">
         <Link
           href="/"

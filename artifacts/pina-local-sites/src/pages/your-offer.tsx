@@ -3,6 +3,8 @@ import { Link } from "wouter";
 import { Check, ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Seo } from "@/components/Seo";
+import { PAGE_SEO } from "@/lib/seo";
 import logoPath from "@/assets/images/logo.avif";
 import heroImg from "../assets/images/hero.avif";
 
@@ -80,6 +82,7 @@ const tiers = [
 export default function YourOffer() {
   return (
     <div className="min-h-[100dvh] flex flex-col bg-background text-foreground">
+      <Seo {...PAGE_SEO.yourOffer} />
       {/* Minimal header */}
       <header className="absolute top-0 left-0 w-full z-20 py-4 px-6 flex items-center">
         <Link

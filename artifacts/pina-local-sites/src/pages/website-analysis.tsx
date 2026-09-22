@@ -2,14 +2,36 @@ import { Link, useSearch } from "wouter";
 import { ArrowLeft } from "lucide-react";
 import logoPath from "@/assets/images/logo.avif";
 import { WebsiteUrlForm } from "@/components/audit";
+import { Seo } from "@/components/Seo";
+import {
+  PAGE_SEO,
+  breadcrumbJsonLd,
+  webPageJsonLd,
+} from "@/lib/seo";
 
 export default function WebsiteAnalysis() {
   const search = useSearch();
   const params = new URLSearchParams(search);
   const submittedUrl = params.get("url");
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      webPageJsonLd({
+        title: PAGE_SEO.websiteAnalysis.title,
+        description: PAGE_SEO.websiteAnalysis.description,
+        path: PAGE_SEO.websiteAnalysis.path,
+      }),
+      breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Website Analysis", path: "/website-analysis" },
+      ]),
+    ],
+  };
+
   return (
     <div className="min-h-[100dvh] flex flex-col bg-background text-foreground">
+      <Seo {...PAGE_SEO.websiteAnalysis} jsonLd={jsonLd} />
       <header className="border-b py-4 px-6 flex items-center gap-3">
         <Link
           href="/"
