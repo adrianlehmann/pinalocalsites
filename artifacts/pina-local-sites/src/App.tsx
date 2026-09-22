@@ -7,6 +7,8 @@ import Home from "@/pages/home";
 import PrivacyPolicy from "@/pages/privacy-policy";
 import TermsOfService from "@/pages/terms-of-service";
 import YourOffer from "@/pages/your-offer";
+import WebsiteAnalysis from "@/pages/website-analysis";
+import WebsiteAnalysisResult from "@/pages/website-analysis-result";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +19,8 @@ function Router() {
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-service" component={TermsOfService} />
       <Route path="/your-offer" component={YourOffer} />
+      <Route path="/website-analysis/:auditId" component={WebsiteAnalysisResult} />
+      <Route path="/website-analysis" component={WebsiteAnalysis} />
       <Route component={NotFound} />
     </Switch>
   );

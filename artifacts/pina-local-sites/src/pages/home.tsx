@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
   X,
   ArrowRight,
   Laptop,
-  Smartphone,
-  Wrench,
   Search,
-  Gauge,
+  MapPin,
   CheckCircle2,
-  Mail,
+  Globe,
+  Megaphone,
+  MousePointerClick,
+  ListChecks,
+  Wrench,
 } from "lucide-react";
 import logoPath from "@/assets/images/logo.avif";
 import heroImg from "../assets/images/hero.avif";
@@ -25,6 +28,11 @@ import imgWaikiki from "../assets/images/portfolio-waikiki.avif";
 
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import {
+  WebsiteUrlForm,
+  AuditScore,
+  AuditFinding,
+} from "@/components/audit";
 
 // --- Types & Data ---
 
@@ -32,9 +40,9 @@ const portfolioItems = [
   {
     id: "fiti",
     name: "FITI PRM",
-    type: "Personal Relationship Manager",
+    type: "Custom Application",
     description:
-      "FITI is an AI-powered revenue execution platform for law firms, consultancies, and professional service firms. It ensures consistent outreach, activates relationships, and creates opportunities before pipeline exists.",
+      "A custom AI-powered revenue execution platform for professional service firms — built as a full web application with outreach workflows and relationship activation.",
     image: imgFiti,
     iconColor: "#000000",
     website: "https://fitiprm.com",
@@ -43,79 +51,79 @@ const portfolioItems = [
   {
     id: "comedy",
     name: "Comedy Bus Tours",
-    type: "Bus Tour Service",
+    type: "Booking-Focused Tour Site",
     description:
-      "A high-energy sightseeing showcase with integrated booking funnels and dynamic itinerary layouts, built for Comedy on Deck Tours to capture the laughter and scale of their live-entertainment excursions.",
+      "A high-energy sightseeing website with integrated booking funnels and dynamic itinerary layouts for Comedy on Deck Tours' live-entertainment excursions.",
     image: imgComedy,
     iconColor: "#ffffff",
     website: "https://comedybustours.com/",
-    tags: ["Web", "Mobile", "WordPress", "Elementor"],
+    tags: ["Web", "Mobile", "WordPress", "Elementor", "Booking"],
   },
   {
     id: "lpm",
     name: "Local Pack Monster",
-    type: "Automated Local SEO Software",
+    type: "Local SEO Software Site",
     description:
-      "A powerful optimization engine with interactive ranking trackers and hands-free profile syncing, engineered for Local Pack Monster to effortlessly demonstrate how their AI agents automate Google Maps visibility.",
+      "A product marketing site for Local Pack Monster, showcasing ranking trackers and AI-driven Google Maps visibility tools for local SEO.",
     image: imgLpm,
     iconColor: "#ffffff",
     website: "https://localpackmonster.com/",
-    tags: ["Web", "Mobile", "WordPress", "Elementor"],
+    tags: ["Web", "Mobile", "WordPress", "Elementor", "Local SEO"],
   },
   {
     id: "conversion",
     name: "Conversion Consulting",
-    type: "Digital Marketing Agency",
+    type: "Conversion-Focused Marketing Site",
     description:
-      "A conversion-focused marketing site for tour operators and water sports companies, highlighting free audits, paid media, and booking-growth services with clear calls to action and case-driven storytelling.",
+      "A conversion-focused marketing site for tour operators and water sports companies, with clear CTAs, free audits, and case-driven storytelling.",
     image: imgConversion,
     iconColor: "#ffffff",
     website: "https://increasewebconversions.com/",
-    tags: ["Web", "Mobile", "WordPress", "Hosting"],
+    tags: ["Web", "Mobile", "WordPress", "Hosting", "Conversions"],
   },
   {
     id: "livingocean",
     name: "Living Ocean Tours",
-    type: "Snorkel & Cruise Tours",
+    type: "Service & Booking Website",
     description:
-      "Oahu’s top-rated snorkel and sunset cruise experience, featuring Turtle Canyon adventures, wildlife cruises, and easy online booking for families exploring Honolulu’s coastline.",
+      "A booking-focused snorkel and sunset cruise site for Oahu, featuring tour packages, wildlife experiences, and easy online reservations.",
     image: imgLivingOcean,
     iconColor: "#ffffff",
     website: "https://livingoceantours.com/",
-    tags: ["Web", "Mobile", "WordPress", "Hosting"],
+    tags: ["Web", "Mobile", "WordPress", "Hosting", "Booking"],
   },
   {
     id: "snorkelturtlecanyon",
     name: "Snorkel Turtle Canyon",
-    type: "Waikiki Snorkeling Tours",
+    type: "Local Service Website",
     description:
-      "A focused booking site for premier Turtle Canyon snorkel tours in Waikiki, built to showcase Hawaiian green sea turtles, tour details, and guided boat adventures for all skill levels.",
+      "A focused booking site for Turtle Canyon snorkel tours in Waikiki, built to showcase tours, marine life, and guided boat adventures.",
     image: imgSnorkelTurtleCanyon,
     iconColor: "#ffffff",
     website: "https://snorkelturtlecanyon.com/",
-    tags: ["Web", "Mobile", "WordPress", "Hosting"],
+    tags: ["Web", "Mobile", "WordPress", "Hosting", "Local SEO"],
   },
   {
     id: "sunsetsail",
     name: "Sunset Sail",
-    type: "Sunset Sailing Experiences",
+    type: "Multi-Location Booking Site",
     description:
-      "Authentic dusk sailing adventures across Key West and Salem, with shared sails, private charters, and a classic fleet experience designed for romance, relaxation, and ocean views.",
+      "A sailing experience website covering Key West and Salem, with shared sails, private charters, and clear booking paths for dusk adventures.",
     image: imgSunsetSail,
     iconColor: "#ffffff",
     website: "https://sunsetsailusa.com/",
-    tags: ["Web", "Mobile", "WordPress", "Hosting"],
+    tags: ["Web", "Mobile", "WordPress", "Hosting", "Booking"],
   },
   {
     id: "waikiki",
     name: "Sunset Cruise Waikiki",
-    type: "Waikiki Sunset Cruises",
+    type: "Booking Funnel Website",
     description:
-      "Daily Waikiki sunset cruises with BYOB and cash bar options, Friday fireworks sailings, and an intimate 45-guest vessel experience along Honolulu’s coastline.",
+      "A Waikiki sunset cruise site with BYOB and cash bar options, Friday fireworks sailings, and straightforward online booking.",
     image: imgWaikiki,
     iconColor: "#ffffff",
     website: "https://sunsetcruisewaikiki.com/",
-    tags: ["Web", "Mobile", "WordPress", "Hosting"],
+    tags: ["Web", "Mobile", "WordPress", "Hosting", "Booking"],
   },
 ];
 
@@ -151,9 +159,9 @@ function Header() {
           : "bg-transparent py-5"
       }`}
     >
-      <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
+      <div className="container mx-auto px-4 md:px-6 flex items-center justify-between gap-4">
         <div
-          className="flex items-center gap-3 cursor-pointer"
+          className="flex items-center gap-3 cursor-pointer shrink-0"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           data-testid="link-home"
         >
@@ -167,12 +175,11 @@ function Header() {
           </span>
         </div>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-6">
           <button
-            onClick={() => scrollTo("what-we-do")}
+            onClick={() => scrollTo("how-i-can-help")}
             className="text-sm font-bold hover:text-primary transition-colors cursor-pointer"
-            data-testid="link-nav-what-we-do"
+            data-testid="link-nav-what-i-do"
           >
             What I Do
           </button>
@@ -183,6 +190,13 @@ function Header() {
           >
             Portfolio
           </button>
+          <Link
+            href="/website-analysis"
+            className="text-sm font-bold text-primary border border-primary/30 bg-primary/10 hover:bg-primary/15 px-4 py-2 rounded-full transition-colors"
+            data-testid="link-nav-analyze"
+          >
+            Analyze My Site
+          </Link>
           <Button
             onClick={() => scrollTo("book")}
             className="rounded-full px-6 border-0 cursor-pointer hover:text-black"
@@ -192,44 +206,47 @@ function Header() {
           </Button>
         </nav>
 
-        {/* Mobile Toggle */}
         <button
-          className="md:hidden p-2 text-foreground"
+          className="lg:hidden p-2 text-foreground"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           data-testid="button-mobile-menu"
         >
           {mobileMenuOpen ? <X /> : <Menu />}
         </button>
       </div>
 
-      {/* Mobile Nav */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 w-full bg-background border-b shadow-lg p-4 flex flex-col gap-4 md:hidden"
+            className="absolute top-full left-0 w-full bg-background border-b shadow-lg p-4 flex flex-col gap-3 lg:hidden"
           >
             <button
-              onClick={() => scrollTo("what-we-do")}
+              onClick={() => scrollTo("how-i-can-help")}
               className="text-lg font-medium p-2 text-left hover:cursor-pointer hover:text-primary rounded-md transition-colors"
-              data-testid="link-mobile-what-we-do"
             >
               What I Do
             </button>
             <button
               onClick={() => scrollTo("portfolio")}
               className="text-lg font-medium p-2 text-left hover:cursor-pointer hover:text-primary rounded-md transition-colors"
-              data-testid="link-mobile-portfolio"
             >
               Portfolio
             </button>
+            <Link
+              href="/website-analysis"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-lg font-bold p-3 text-center text-primary border border-primary/30 bg-primary/10 rounded-full"
+            >
+              Analyze My Site
+            </Link>
             <Button
               onClick={() => scrollTo("book")}
-              className="w-full mt-2 hover:cursor-pointer hover:text-black transition-colors"
+              className="w-full mt-1 hover:cursor-pointer hover:text-black transition-colors border-0"
               size="lg"
-              data-testid="button-mobile-book"
             >
               Book a Consultation
             </Button>
@@ -244,16 +261,16 @@ function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-[100dvh] flex items-center pt-20 overflow-hidden"
+      className="relative min-h-[100dvh] flex items-center pt-24 pb-16 overflow-hidden"
     >
-      {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
           src={heroImg}
-          alt="Creative workspace"
+          alt=""
+          aria-hidden="true"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/30 dark:from-background dark:via-background/90 dark:to-background/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/40 dark:from-background dark:via-background/90 dark:to-background/50" />
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -262,70 +279,130 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="max-w-2xl"
-        >          
-          <h1 className="text-5xl md:text-7xl font-serif font-bold text-foreground leading-[1.1] tracking-tight mb-6">
-            Beautiful websites for{" "}
-            <span className="text-primary italic">local businesses</span>.
-          </h1>
-          <p className="text-lg md:text-xl text-foreground/80 mb-10 leading-relaxed max-w-xl">
-            I'm your talented neighbor building custom, mobile-first websites
-            that turn local visitors into loyal customers — with a sharp focus
-            on SEO and performance. No templates, just craft.
+        >
+          <p className="text-sm font-bold uppercase tracking-widest text-primary mb-4">
+            Websites · SEO · Google
           </p>
-          <Button
-            size="lg"
-            className="rounded-full px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 hover:cursor-pointer hover:text-black"
-            onClick={() =>
-              document
-                .getElementById("book")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
-            data-testid="button-hero-cta"
-          >
-            Start Your Project <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-serif font-bold text-foreground leading-[1.1] tracking-tight mb-6">
+            Is your business getting{" "}
+            <span className="text-primary italic">found online</span>?
+          </h1>
+          <p className="text-lg md:text-xl text-foreground/80 mb-8 leading-relaxed max-w-xl">
+            Your website, Google Business Profile, and Google Ads all affect how
+            customers find and choose your business. I can analyze what's
+            working, find what's holding you back, and help you improve it.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 mb-5">
+            <Button
+              asChild
+              size="lg"
+              className="rounded-full px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 hover:cursor-pointer hover:text-black border-0"
+              data-testid="button-hero-analyze"
+            >
+              <Link href="/website-analysis">
+                Get a Free Website Analysis
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="rounded-full px-8 py-6 text-lg bg-background/70 backdrop-blur hover:cursor-pointer"
+              onClick={() =>
+                document
+                  .getElementById("portfolio")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+              data-testid="button-hero-portfolio"
+            >
+              View My Work
+            </Button>
+          </div>
+          <p className="text-sm text-foreground/70">
+            No commitment. Find out what could be improved.
+          </p>
         </motion.div>
       </div>
     </section>
   );
 }
 
-function WhatWeDo() {
-  const services = [
+function HoldingYouBack() {
+  const problems = [
     {
-      icon: <Laptop className="w-10 h-10 text-primary" />,
-      title: "Custom Website Design",
+      icon: <Globe className="w-7 h-7 text-primary" />,
+      title: "Website & SEO",
       description:
-        "I design beautiful, unique websites tailored to your brand and local audience. Your business isn't generic, your site shouldn't be either.",
+        "Your website may look great but still have technical SEO, content, structure or local-search problems.",
     },
     {
-      icon: <Smartphone className="w-10 h-10 text-primary" />,
-      title: "Mobile-First Development",
+      icon: <MapPin className="w-7 h-7 text-primary" />,
+      title: "Google Business Profile",
       description:
-        "Every site I build looks perfect on phones, tablets, and desktops. Your customers get a seamless experience anywhere.",
+        "Your Google Business Profile is often one of the first things customers see when they search for a local business.",
     },
     {
-      icon: <Search className="w-10 h-10 text-primary" />,
-      title: "SEO & Local Visibility",
+      icon: <Megaphone className="w-7 h-7 text-primary" />,
+      title: "Google Ads",
       description:
-        "I build with search in mind — clean structure, on-page SEO, and local signals that help customers find you on Google.",
+        "Paid traffic can get expensive when campaigns, keywords, search terms or landing pages aren't working together.",
     },
     {
-      icon: <Gauge className="w-10 h-10 text-primary" />,
-      title: "Website Performance",
+      icon: <MousePointerClick className="w-7 h-7 text-primary" />,
+      title: "Conversions",
       description:
-        "Fast load times aren't optional. I optimize images, code, and hosting so your site feels snappy and converts better.",
-    },
-    {
-      icon: <Wrench className="w-10 h-10 text-primary" />,
-      title: "Ongoing Support & Maintenance",
-      description:
-        "I don't just launch and leave — I'm here to keep your site running smooth, updated, and secure.",
+        "Getting someone to your website is only half the job. The site also needs to make it easy for them to call, book, request a quote or buy.",
     },
   ];
 
   return (
-    <section id="what-we-do" className="py-24 bg-card">
+    <section id="holding-you-back" className="py-24 bg-card">
+      <div className="container mx-auto px-4 md:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mb-14"
+        >
+          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">
+            Your website is only part of the picture.
+          </h2>
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            Having a website doesn't necessarily mean customers can find you —
+            or that the people who do find you become customers.
+          </p>
+        </motion.div>
+
+        <div className="grid sm:grid-cols-2 gap-6">
+          {problems.map((item, i) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              className="bg-background border rounded-2xl p-7 shadow-sm"
+            >
+              <div className="bg-primary/10 w-12 h-12 rounded-xl flex items-center justify-center mb-5">
+                {item.icon}
+              </div>
+              <h3 className="text-lg font-bold mb-2 uppercase tracking-wide text-sm">
+                {item.title}
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {item.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HowICanHelp() {
+  return (
+    <section id="how-i-can-help" className="py-24 bg-background">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -334,34 +411,377 @@ function WhatWeDo() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">
-            What I Do
+            How I Can Help
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            I handle the technical heavy lifting — design, SEO, and performance
-            — so you can focus on running your business.
+            Sometimes you need a new website. Sometimes you just need to know
+            what's wrong with the one you already have.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((s, i) => (
+        <div className="grid lg:grid-cols-3 gap-6 items-stretch">
+          {/* Service 1 — Website */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-card border rounded-3xl p-8 shadow-sm flex flex-col"
+          >
+            <div className="bg-primary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+              <Laptop className="w-7 h-7 text-primary" />
+            </div>
+            <h3 className="text-2xl font-bold mb-3">Build a Website</h3>
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              I design and build custom, mobile-first websites for local
+              businesses — with SEO, performance and conversions built in from
+              the start.
+            </p>
+            <ul className="space-y-2 mb-8 flex-1">
+              {[
+                "Custom design",
+                "Mobile-first",
+                "SEO foundations",
+                "Fast performance",
+                "Conversion-focused",
+                "Ongoing support",
+              ].map((f) => (
+                <li key={f} className="flex items-center gap-2 text-sm">
+                  <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+            <Button
+              className="w-full rounded-full font-bold border-0 hover:text-black"
+              onClick={() =>
+                document
+                  .getElementById("book")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              Build My Website
+            </Button>
+          </motion.div>
+
+          {/* Service 2 — Analysis (emphasized) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="relative bg-primary text-primary-foreground border border-primary rounded-3xl p-8 shadow-xl flex flex-col"
+          >
+            <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-foreground text-background text-xs font-bold uppercase tracking-wider px-4 py-1 rounded-full whitespace-nowrap">
+              Start here · Free initial analysis
+            </span>
+            <div className="bg-primary-foreground/15 w-14 h-14 rounded-xl flex items-center justify-center mb-6 mt-2">
+              <Search className="w-7 h-7" />
+            </div>
+            <h3 className="text-2xl font-bold mb-3">Analyze My Website</h3>
+            <p className="text-primary-foreground/85 leading-relaxed mb-6">
+              Already have a website? I'll look at what's working, what's not,
+              and where you have opportunities to improve.
+            </p>
+            <ul className="space-y-2 mb-8 flex-1">
+              {[
+                "Technical SEO",
+                "Search visibility",
+                "Content & structure",
+                "Performance",
+                "Local SEO",
+                "Conversion opportunities",
+              ].map((f) => (
+                <li key={f} className="flex items-center gap-2 text-sm">
+                  <CheckCircle2 className="w-4 h-4 shrink-0 opacity-90" />
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+            <Button
+              asChild
+              className="w-full rounded-full font-bold bg-primary-foreground text-primary hover:bg-primary-foreground/90 border-0"
+            >
+              <Link href="/website-analysis">Get a Free Analysis</Link>
+            </Button>
+          </motion.div>
+
+          {/* Service 3 — Google Presence */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.15 }}
+            className="bg-card border rounded-3xl p-8 shadow-sm flex flex-col"
+          >
+            <div className="bg-primary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+              <MapPin className="w-7 h-7 text-primary" />
+            </div>
+            <h3 className="text-2xl font-bold mb-3">
+              Improve Your Google Presence
+            </h3>
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              Your website isn't the only thing customers see. I can also
+              analyze the parts of Google that drive local visibility and paid
+              traffic.
+            </p>
+
+            <div className="space-y-5 mb-8 flex-1">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-primary mb-2">
+                  Google Business Profile
+                </p>
+                <ul className="space-y-1.5 text-sm text-muted-foreground">
+                  {[
+                    "Profile optimization",
+                    "Categories",
+                    "Services",
+                    "Reviews",
+                    "Photos",
+                    "Local visibility",
+                  ].map((f) => (
+                    <li key={f} className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-primary mb-2">
+                  Google Ads
+                </p>
+                <ul className="space-y-1.5 text-sm text-muted-foreground">
+                  {[
+                    "Campaign structure",
+                    "Keywords",
+                    "Search terms",
+                    "Landing pages",
+                    "Conversion opportunities",
+                  ].map((f) => (
+                    <li key={f} className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <Button
+              className="w-full rounded-full font-bold border-0 hover:text-black"
+              onClick={() =>
+                document
+                  .getElementById("book")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              Improve My Google Presence
+            </Button>
+          </motion.div>
+        </div>
+
+        <p className="text-center text-sm text-muted-foreground mt-10 max-w-2xl mx-auto">
+          Behind every service: custom design, mobile-first development, SEO &
+          local visibility, website performance, and ongoing support when you
+          need it.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function HowItWorks() {
+  const steps = [
+    {
+      num: "01",
+      title: "Analyze",
+      description:
+        "I look at your website and online presence to identify problems and opportunities.",
+      icon: <Search className="w-6 h-6 text-primary" />,
+    },
+    {
+      num: "02",
+      title: "Prioritize",
+      description:
+        "Not every SEO issue matters equally. I'll focus on the changes that are actually worth making.",
+      icon: <ListChecks className="w-6 h-6 text-primary" />,
+    },
+    {
+      num: "03",
+      title: "Improve",
+      description:
+        "You can make the changes yourself, or I can take care of them for you.",
+      icon: <Wrench className="w-6 h-6 text-primary" />,
+    },
+  ];
+
+  return (
+    <section id="how-it-works" className="py-24 bg-card">
+      <div className="container mx-auto px-4 md:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4 max-w-3xl mx-auto">
+            Find the problem. Prioritize the opportunity. Fix it.
+          </h2>
+        </motion.div>
+
+        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {steps.map((step, i) => (
             <motion.div
-              key={i}
+              key={step.num}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-background border rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
+              className="text-center md:text-left"
             >
-              <div className="bg-primary/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
-                {s.icon}
+              <div className="inline-flex items-center justify-center bg-primary/10 w-12 h-12 rounded-xl mb-5">
+                {step.icon}
               </div>
-              <h3 className="text-xl font-bold mb-3">{s.title}</h3>
+              <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">
+                Step {step.num}
+              </p>
+              <h3 className="text-2xl font-bold mb-3">{step.title}</h3>
               <p className="text-muted-foreground leading-relaxed">
-                {s.description}
+                {step.description}
               </p>
             </motion.div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+function AnalysisTool() {
+  return (
+    <section id="analyze" className="py-24 bg-background relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/3 pointer-events-none" />
+
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-2xl mx-auto text-center"
+        >
+          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">
+            Not sure what's wrong with your website?
+          </h2>
+          <p className="text-muted-foreground text-lg mb-10 leading-relaxed">
+            Enter your website and get a look at the biggest opportunities
+            across SEO, performance, content and local search.
+          </p>
+
+          <div className="rounded-3xl border bg-card p-6 md:p-8 shadow-sm text-left">
+            <WebsiteUrlForm />
+            <p className="text-sm text-muted-foreground mt-4 text-center">
+              No credit card. No commitment.
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function ExampleAudit() {
+  return (
+    <section id="example-audit" className="py-24 bg-card">
+      <div className="container mx-auto px-4 md:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <p className="text-sm font-bold uppercase tracking-widest text-primary mb-3">
+            Example Website Analysis
+          </p>
+          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">
+            See what an analysis looks like
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            A clear view of what's working, what isn't, and what to fix first —
+            without the jargon.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto rounded-3xl border bg-background p-6 md:p-10 shadow-sm"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 pb-8 border-b">
+            <div>
+              <h3 className="text-2xl font-bold">ABC Plumbing</h3>
+              <p className="text-muted-foreground">abcplumbing.com</p>
+            </div>
+            <p className="text-xs font-medium text-muted-foreground bg-muted px-3 py-1.5 rounded-full w-fit">
+              Fictional example for demonstration
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-6 mb-8">
+            <AuditScore score={67} />
+            <div className="flex flex-col gap-3">
+              {[
+                { n: "3", l: "High priority issues" },
+                { n: "6", l: "Improvements" },
+                { n: "12", l: "Things working well" },
+              ].map((stat) => (
+                <div
+                  key={stat.l}
+                  className="rounded-2xl border bg-card px-4 py-3 flex items-center gap-4 min-w-0"
+                >
+                  <p className="text-2xl font-bold text-primary shrink-0 tabular-nums w-10 text-center">
+                    {stat.n}
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-snug">
+                    {stat.l}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-4 mb-8">
+            <AuditFinding
+              priority="high"
+              title="Your service pages aren't targeting local searches effectively"
+            />
+            <AuditFinding
+              priority="medium"
+              title="Mobile performance could be improved"
+            />
+            <AuditFinding
+              priority="medium"
+              title="Important pages have weak internal linking"
+            />
+          </div>
+
+          <p className="text-xs text-muted-foreground mb-6 text-center">
+            Example results shown for demonstration purposes.
+          </p>
+
+          <div className="flex justify-center">
+            <Button
+              asChild
+              size="lg"
+              className="rounded-full px-8 font-bold border-0 hover:text-black"
+            >
+              <Link href="/website-analysis">
+                Get My Free Analysis
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+            </Button>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -372,8 +792,6 @@ function Portfolio() {
     (typeof portfolioItems)[0] | null
   >(null);
 
-  // Repeat enough times so each half of the track always fills the viewport
-  // (needed for a seamless -50% translate loop on wide screens).
   const loopSet = Array.from({ length: 4 }, () => portfolioItems).flat();
 
   const renderCards = (keyPrefix: string, ariaHidden = false) =>
@@ -382,18 +800,24 @@ function Portfolio() {
         key={`${keyPrefix}-${item.id}-${i}`}
         className="w-[300px] md:w-[400px] shrink-0 px-4"
         onClick={() => setSelectedProject(item)}
+        onKeyDown={(e) => {
+          if (!ariaHidden && (e.key === "Enter" || e.key === " ")) {
+            e.preventDefault();
+            setSelectedProject(item);
+          }
+        }}
+        role={ariaHidden ? undefined : "button"}
+        tabIndex={ariaHidden ? undefined : 0}
         aria-hidden={ariaHidden || undefined}
       >
         <div
           className="group relative rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border bg-card"
-          data-testid={
-            ariaHidden ? undefined : `card-portfolio-${item.id}`
-          }
+          data-testid={ariaHidden ? undefined : `card-portfolio-${item.id}`}
         >
           <div className="aspect-[4/3] overflow-hidden">
             <img
               src={item.image}
-              alt={ariaHidden ? "" : item.name}
+              alt={ariaHidden ? "" : `${item.name} website screenshot`}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           </div>
@@ -419,17 +843,16 @@ function Portfolio() {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">
-            My Work
+            Websites built for real businesses.
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl">
-            A selection of recent websites I've crafted for local businesses.
+            From local service businesses to tour operators and digital
+            products, here's some of the work I've built.
           </p>
         </motion.div>
       </div>
 
-      {/* Infinite Carousel */}
       <div className="relative w-full pb-8">
-        {/* Gradients for smooth edge fading */}
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
@@ -441,7 +864,6 @@ function Portfolio() {
         </div>
       </div>
 
-      {/* Project Modal */}
       <Dialog
         open={!!selectedProject}
         onOpenChange={(open) => !open && setSelectedProject(null)}
@@ -452,16 +874,14 @@ function Portfolio() {
         >
           {selectedProject && (
             <div className="flex flex-col h-[85vh] md:h-auto md:max-h-[85vh]">
-              {/* Image Header */}
               <div className="relative w-full aspect-video md:aspect-[21/9] bg-muted shrink-0">
                 <img
                   src={selectedProject.image}
-                  alt={selectedProject.name}
+                  alt={`${selectedProject.name} website screenshot`}
                   className="w-full h-full object-cover"
                 />
               </div>
 
-              {/* Content */}
               <div className="p-6 md:p-8 overflow-y-auto">
                 <DialogTitle className="text-3xl font-serif font-bold mb-2">
                   {selectedProject.name}
@@ -490,8 +910,10 @@ function Portfolio() {
                 <div className="pt-4 border-t flex justify-end">
                   <Button
                     size="lg"
-                    className="rounded-full cursor-pointer hover:text-black"
-                    onClick={() => window.open(selectedProject.website, "_blank")}
+                    className="rounded-full cursor-pointer hover:text-black border-0"
+                    onClick={() =>
+                      window.open(selectedProject.website, "_blank")
+                    }
                     data-testid="button-visit-site"
                   >
                     Visit Website
@@ -506,10 +928,56 @@ function Portfolio() {
   );
 }
 
+function FinalCTA() {
+  return (
+    <section className="py-24 bg-card">
+      <div className="container mx-auto px-4 md:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto text-center"
+        >
+          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">
+            Not sure what your website needs?
+          </h2>
+          <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+            Let's take a look. Get a free analysis and see where your website
+            and online presence could improve.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button
+              asChild
+              size="lg"
+              className="rounded-full px-8 font-bold border-0 hover:text-black"
+            >
+              <Link href="/website-analysis">
+                Get a Free Website Analysis
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="rounded-full px-8 font-bold"
+              onClick={() =>
+                document
+                  .getElementById("book")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              Book a Call
+            </Button>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 function Book() {
   return (
-    <section id="book" className="py-24 bg-card relative overflow-hidden">
-      {/* Decorative background element */}
+    <section id="book" className="py-24 bg-background relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -520,29 +988,32 @@ function Book() {
             viewport={{ once: true }}
             className="flex-1"
           >
+            <p className="text-sm font-bold uppercase tracking-widest text-primary mb-3">
+              Already know you need help?
+            </p>
             <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 leading-tight">
-              Ready to stand out locally?
+              Book a free discovery call
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Book a free consultation today. I'll discuss your business goals,
-              review your current online presence, and show you how a custom,
-              SEO-ready website can drive more local traffic.
+              If you already know you need a new website, local SEO help, or a
+              Google presence review — let's talk. I'll walk through your goals
+              and recommend the right next step.
             </p>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <CheckCircle2 className="text-primary w-6 h-6" />
+                <CheckCircle2 className="text-primary w-6 h-6 shrink-0" />
                 <span className="font-medium">
                   Free 30-minute discovery call
                 </span>
               </div>
               <div className="flex items-center gap-3">
-                <CheckCircle2 className="text-primary w-6 h-6" />
+                <CheckCircle2 className="text-primary w-6 h-6 shrink-0" />
                 <span className="font-medium">No pressure, honest advice</span>
               </div>
               <div className="flex items-center gap-3">
-                <CheckCircle2 className="text-primary w-6 h-6" />
+                <CheckCircle2 className="text-primary w-6 h-6 shrink-0" />
                 <span className="font-medium">
-                  Custom proposal within 48 hours
+                  Clear next steps after the call
                 </span>
               </div>
             </div>
@@ -552,7 +1023,7 @@ function Book() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="w-full max-w-md bg-background rounded-3xl p-8 shadow-xl border relative flex flex-col justify-center min-h-[280px]"
+            className="w-full max-w-md bg-card rounded-3xl p-8 shadow-xl border relative flex flex-col justify-center min-h-[280px]"
           >
             <h3 className="text-2xl font-bold mb-4">Book a Consultation</h3>
             <p className="text-muted-foreground mb-8">
@@ -561,7 +1032,7 @@ function Book() {
             </p>
             <Button
               asChild
-              className="w-full rounded-full py-6 text-base font-bold hover:shadow-xl transition-all hover:-translate-y-1 hover:cursor-pointer hover:text-black"
+              className="w-full rounded-full py-6 text-base font-bold hover:shadow-xl transition-all hover:-translate-y-1 hover:cursor-pointer hover:text-black border-0"
               data-testid="button-book-calendly"
             >
               <a
@@ -573,6 +1044,16 @@ function Book() {
                 <ArrowRight className="ml-2 w-5 h-5" />
               </a>
             </Button>
+            <p className="text-sm text-muted-foreground mt-5 text-center">
+              Not sure what you need?{" "}
+              <Link
+                href="/website-analysis"
+                className="text-primary underline underline-offset-2 hover:opacity-80"
+              >
+                Get a free website analysis
+              </Link>{" "}
+              instead.
+            </p>
           </motion.div>
         </div>
       </div>
@@ -597,9 +1078,9 @@ function Footer() {
               </span>
             </div>
             <p className="text-muted max-w-sm">
-              I build beautiful, fast, and highly-converting custom websites for
-              local businesses — with SEO and performance built in from day one.
-              Your digital business card, crafted with care.
+              I help local businesses understand and improve their online
+              presence — websites, SEO, Google Business Profile, and more. Build
+              it, analyze it, improve it.
             </p>
             <p className="text-sm text-muted mt-4">
               Piña Local Sites is operated by HealthyDigital LLC.
@@ -608,13 +1089,13 @@ function Footer() {
 
           <div>
             <h4 className="font-bold mb-6 uppercase tracking-wider text-sm text-primary">
-              Company
+              Explore
             </h4>
             <div className="flex flex-col gap-2 justify-start">
               <button
                 onClick={() =>
                   document
-                    .getElementById("what-we-do")
+                    .getElementById("how-i-can-help")
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
                 className="text-muted hover:text-primary transition-colors hover:cursor-pointer text-left"
@@ -631,6 +1112,12 @@ function Footer() {
               >
                 Portfolio
               </button>
+              <Link
+                href="/website-analysis"
+                className="text-muted hover:text-primary transition-colors text-left"
+              >
+                Analyze My Site
+              </Link>
               <button
                 onClick={() =>
                   document
@@ -690,8 +1177,13 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <WhatWeDo />
+        <HoldingYouBack />
+        <HowICanHelp />
+        <HowItWorks />
+        <AnalysisTool />
+        <ExampleAudit />
         <Portfolio />
+        <FinalCTA />
         <Book />
       </main>
       <Footer />
