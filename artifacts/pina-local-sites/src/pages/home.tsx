@@ -28,11 +28,7 @@ import imgWaikiki from "../assets/images/portfolio-waikiki.avif";
 
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import {
-  WebsiteUrlForm,
-  AuditScore,
-  AuditFinding,
-} from "@/components/audit";
+import { AuditScore, AuditFinding } from "@/components/audit";
 import { Seo } from "@/components/Seo";
 import {
   HOME_FAQS,
@@ -41,6 +37,7 @@ import {
   organizationJsonLd,
   webPageJsonLd,
   BUSINESS,
+  CALENDLY_URL,
 } from "@/lib/seo";
 
 // --- Types & Data ---
@@ -136,8 +133,6 @@ const portfolioItems = [
   },
 ];
 
-const CALENDLY_URL = "https://calendly.com/pinalocalsites/30min";
-
 // --- Components ---
 
 function Header() {
@@ -199,13 +194,15 @@ function Header() {
           >
             Portfolio
           </button>
-          <Link
-            href="/website-analysis"
+          <a
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-sm font-bold text-primary border border-primary/30 bg-primary/10 hover:bg-primary/15 px-4 py-2 rounded-full transition-colors"
             data-testid="link-nav-analyze"
           >
             Analyze My Site
-          </Link>
+          </a>
           <Button
             onClick={() => scrollTo("book")}
             className="rounded-full px-6 border-0 cursor-pointer hover:text-black"
@@ -245,13 +242,15 @@ function Header() {
             >
               Portfolio
             </button>
-            <Link
-              href="/website-analysis"
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
               className="text-lg font-bold p-3 text-center text-primary border border-primary/30 bg-primary/10 rounded-full"
             >
               Analyze My Site
-            </Link>
+            </a>
             <Button
               onClick={() => scrollTo("book")}
               className="w-full mt-1 hover:cursor-pointer hover:text-black transition-colors border-0"
@@ -310,10 +309,14 @@ function Hero() {
               className="rounded-full px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 hover:cursor-pointer hover:text-black border-0"
               data-testid="button-hero-analyze"
             >
-              <Link href="/website-analysis">
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Get a Free Website Analysis
                 <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
+              </a>
             </Button>
             <Button
               size="lg"
@@ -512,7 +515,13 @@ function HowICanHelp() {
               asChild
               className="w-full rounded-full font-bold bg-primary-foreground text-primary hover:bg-primary-foreground/90 border-0"
             >
-              <Link href="/website-analysis">Get a Free Analysis</Link>
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Get a Free Analysis
+              </a>
             </Button>
           </motion.div>
 
@@ -683,15 +692,29 @@ function AnalysisTool() {
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">
             Not sure what's wrong with your website?
           </h2>
-          <p className="text-muted-foreground text-lg mb-10 leading-relaxed">
-            Enter your website and get a look at the biggest opportunities
-            across SEO, performance, content and local search.
+          <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
+            Book a free look. On the scheduling page, paste your website into
+            the analysis field and I'll review SEO, performance, content, and
+            local search before we talk.
           </p>
 
-          <div className="rounded-3xl border bg-card p-6 md:p-8 shadow-sm text-left">
-            <WebsiteUrlForm />
-            <p className="text-sm text-muted-foreground mt-4 text-center">
-              No credit card. No commitment.
+          <div className="rounded-3xl border bg-card p-6 md:p-8 shadow-sm">
+            <Button
+              asChild
+              size="lg"
+              className="w-full sm:w-auto rounded-full px-8 font-bold border-0 hover:text-black"
+            >
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Get a Free Website Analysis
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </a>
+            </Button>
+            <p className="text-sm text-muted-foreground mt-4">
+              No credit card. No commitment. Just pick a time and add your URL.
             </p>
           </div>
         </motion.div>
@@ -786,10 +809,14 @@ function ExampleAudit() {
               size="lg"
               className="rounded-full px-8 font-bold border-0 hover:text-black"
             >
-              <Link href="/website-analysis">
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Get My Free Analysis
                 <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
+              </a>
             </Button>
           </div>
         </motion.div>
@@ -1003,9 +1030,9 @@ function FinalCTA() {
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">
             Not sure what your website needs?
           </h2>
-          <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-            Let's take a look. Get a free analysis and see where your website
-            and online presence could improve.
+            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+            Let's take a look. Book a free analysis, add your website on the
+            scheduling page, and I'll show you where it could improve.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
@@ -1013,10 +1040,14 @@ function FinalCTA() {
               size="lg"
               className="rounded-full px-8 font-bold border-0 hover:text-black"
             >
-              <Link href="/website-analysis">
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Get a Free Website Analysis
                 <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
+              </a>
             </Button>
             <Button
               size="lg"
@@ -1107,14 +1138,8 @@ function Book() {
               </a>
             </Button>
             <p className="text-sm text-muted-foreground mt-5 text-center">
-              Not sure what you need?{" "}
-              <Link
-                href="/website-analysis"
-                className="text-primary underline underline-offset-2 hover:opacity-80"
-              >
-                Get a free website analysis
-              </Link>{" "}
-              instead.
+              Want a website review? Add your URL in the analysis field when
+              you book.
             </p>
           </motion.div>
         </div>
@@ -1199,12 +1224,14 @@ function Footer() {
               >
                 Portfolio
               </button>
-              <Link
-                href="/website-analysis"
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-muted hover:text-primary transition-colors text-left"
               >
                 Analyze My Site
-              </Link>
+              </a>
               <button
                 onClick={() =>
                   document

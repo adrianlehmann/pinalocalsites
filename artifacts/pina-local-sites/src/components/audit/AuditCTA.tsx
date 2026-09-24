@@ -1,6 +1,6 @@
-import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CALENDLY_URL } from "@/lib/seo";
 
 interface AuditCTAProps {
   headline?: string;
@@ -10,7 +10,7 @@ interface AuditCTAProps {
 
 export function AuditCTA({
   headline = "Ready for your own analysis?",
-  description = "Enter your website and see where your online presence could improve.",
+  description = "Book a time and add your website in the analysis field. I'll look at where your online presence could improve.",
   className = "",
 }: AuditCTAProps) {
   return (
@@ -28,10 +28,10 @@ export function AuditCTA({
         size="lg"
         className="rounded-full px-8 font-bold border-0 hover:text-black"
       >
-        <Link href="/website-analysis">
+        <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
           Get My Free Analysis
           <ArrowRight className="ml-2 w-5 h-5" />
-        </Link>
+        </a>
       </Button>
     </div>
   );

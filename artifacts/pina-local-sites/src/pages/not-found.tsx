@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Home, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Seo } from "@/components/Seo";
-import { PAGE_SEO } from "@/lib/seo";
+import { CALENDLY_URL, PAGE_SEO } from "@/lib/seo";
 import logoPath from "@/assets/images/logo.avif";
 
 export default function NotFound() {
@@ -51,10 +51,10 @@ export default function NotFound() {
               variant="outline"
               className="rounded-full"
             >
-              <Link href="/website-analysis">
+              <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
                 <Search className="w-4 h-4 mr-2" />
                 Free Website Analysis
-              </Link>
+              </a>
             </Button>
           </div>
           <nav className="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">

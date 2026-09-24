@@ -2,6 +2,7 @@ export const SITE_URL = "https://pinalocalsites.com";
 export const SITE_NAME = "Piña Local Sites";
 export const SITE_LEGAL_NAME = "HealthyDigital LLC";
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/opengraph.jpg`;
+export const CALENDLY_URL = "https://calendly.com/pinalocalsites/30min";
 
 export const BUSINESS = {
   email: "adrian@pinalocalsites.com",
@@ -37,7 +38,7 @@ export const PAGE_SEO = {
   websiteAnalysis: {
     title: "Free Website Analysis | Piña Local Sites",
     description:
-      "Enter your website URL for a free look at SEO, performance, content, and local search opportunities. No credit card required.",
+      "Book a free website analysis. Add your URL on the scheduling page and I'll review SEO, performance, content, and local search.",
     path: "/website-analysis",
   },
   websiteAnalysisResult: {
@@ -226,7 +227,7 @@ export const HOME_FAQS = [
   {
     question: "What does the free website analysis cover?",
     answer:
-      "The analysis looks at opportunities across SEO, performance, content, structure, local search, and conversions — so you can see what is working and what could be improved before committing to a project.",
+      "Book a free call and paste your website into the analysis field on the scheduling page. I'll look at SEO, performance, content, structure, local search, and conversions so you can see what's working and what could be improved.",
   },
   {
     question: "Can you help if I already have a website?",

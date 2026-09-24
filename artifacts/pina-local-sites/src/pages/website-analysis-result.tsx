@@ -5,7 +5,7 @@ import logoPath from "@/assets/images/logo.avif";
 import { AuditProgress, AuditCTA } from "@/components/audit";
 import { getAudit, type AuditResult, type AuditStatus } from "@/lib/audit";
 import { Seo } from "@/components/Seo";
-import { PAGE_SEO } from "@/lib/seo";
+import { CALENDLY_URL, PAGE_SEO } from "@/lib/seo";
 
 const POLL_INTERVAL_MS = 2500;
 
@@ -77,13 +77,15 @@ export default function WebsiteAnalysisResult() {
       </header>
 
       <main className="flex-1 container mx-auto px-4 md:px-6 py-16 max-w-3xl">
-        <Link
-          href="/website-analysis"
+        <a
+          href={CALENDLY_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-10"
         >
           <ArrowLeft className="w-4 h-4" />
           Start another analysis
-        </Link>
+        </a>
 
         <h1 className="text-3xl md:text-4xl font-serif font-bold mb-2">
           Website analysis
